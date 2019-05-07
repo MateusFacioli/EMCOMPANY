@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">EasyMeal</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="FACEBOOK_APP_ID">521349008392659</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">0799123c3ea8fa2fe9590c243d7ca6f0</string>
+    <string name="title_activity_comerciante">ComercianteActivity</string>
+</resources>
+
+

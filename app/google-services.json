@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "605243143793",
+    "firebase_url": "https://tcc-2019-8f616.firebaseio.com",
+    "project_id": "tcc-2019-8f616",
+    "storage_bucket": "tcc-2019-8f616.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605243143793:android:c3a1f79f6a5ffda5",
+        "android_client_info": {
+          "package_name": "com.tcc.easymeal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605243143793-11vh1uchti71mrtktit3v5iggddh3808.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tcc.easymeal",
+            "certificate_hash": "bc03b6a96213a64e099adb8cdba6b9bec515eba8"
+          }
+        },
+        {
+          "client_id": "605243143793-u0b21o7dgl84so1ekicrtj60uflm3jg9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB76PrE6zTlm1IEee_n2Crwj9QCGI4PBdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605243143793-u0b21o7dgl84so1ekicrtj60uflm3jg9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
