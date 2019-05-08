@@ -52,6 +52,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
     private PlacesClient placesClient;
     private LatLng latLng;
     private Button btnOnline;
+    private Button btnSair;
     private Button btnCadastrar;
     private Comerciante comerciante = new Comerciante();
     private Cardapio cardapio = new Cardapio();
@@ -106,6 +107,14 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         //
         //            }
         //        });
+
+        btnSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+            }
+        });
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,6 +245,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
         btnCadastrar = findViewById(R.id.btnCadastrar);
+        btnSair = findViewById(R.id.btnSair);
 
 
     }
