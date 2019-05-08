@@ -3,7 +3,9 @@ package com.tcc.easymeal.model;
 import com.google.firebase.database.DatabaseReference;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 
-public class Comerciante {
+import java.io.Serializable;
+
+public class Comerciante implements Serializable {
 
     private String uid;
     private String nome;

@@ -1,6 +1,7 @@
 package com.tcc.easymeal.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -30,8 +31,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.helper.UsuarioFirebase;
+import com.tcc.easymeal.model.Cardapio;
 import com.tcc.easymeal.model.Comerciante;
-import com.tcc.easymeal.model.Localizacao;
+import com.tcc.easymeal.model.Loja;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,10 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
     private PlacesClient placesClient;
     private LatLng latLng;
     private Button btnOnline;
+    private Button btnCadastrar;
     private Comerciante comerciante = new Comerciante();
+    private Cardapio cardapio = new Cardapio();
+    private Loja loja = new Loja();
 
 
 
@@ -78,17 +83,37 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                     .build();
         }
 
-        btnOnline.setOnClickListener(new View.OnClickListener() {
+    //    btnOnline.setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View v) {
+        //                if(latLng!=null){
+        //                    if(!cardapio.getNome().isEmpty()) {
+        //                        if(!cardapio.getPreço().isEmpty()){
+        //                            if(!cardapio.getItens().isEmpty()){
+        //
+        //                                pegarDadosUsuario();
+        //                                loja.salvar();
+        //
+        //                            }else {
+        //                                Toast.makeText(ComercianteActivity.this, "Preencha o cardapio", Toast.LENGTH_SHORT).show();
+        //                            }
+        //                        }
+        //
+        //                    }
+        //
+        //                  //  btnOnline.setBackgroundColor(Color.blue(2));
+        //                }
+        //
+        //            }
+        //        });
+
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(latLng!=null){
-                    Localizacao localizacao = new Localizacao();
-                    localizacao.setLatitude(latLng.latitude);
-                    localizacao.setLongitude(latLng.longitude);
-                    salvaLocal(localizacao);
 
-                  //  btnOnline.setBackgroundColor(Color.blue(2));
-                }
+                enviaParaCadastro();
+
+
 
             }
         });
@@ -97,7 +122,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
     }
 
-    private void salvaLocal(Localizacao localizacao){
+    private void enviaParaCadastro(){
 
 
        if(mUser != null){
@@ -115,8 +140,16 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                    }
 
                    comerciante = lista.get(0);
-                   localizacao.setComerciante(comerciante);
-                   localizacao.salvar();
+                   loja.setComerciante(comerciante);
+
+                   Intent cadastrar = new Intent(ComercianteActivity.this, CardapioActivity.class);
+
+                   Bundle bundle = new Bundle();
+                   bundle.putSerializable("loja", loja);
+                   cadastrar.putExtras(bundle);
+
+                   startActivity(cadastrar);
+
 
 
 
@@ -135,9 +168,13 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         //String idToken = task.getResult().getToken();
         //                            Comerciante comerciante = new Comerciante();
         //                            comerciante.setUid(mUser.getUid());
-        //                            localizacao.setComerciante(comerciante);
-        //                            localizacao.salvar();
+        //                            loja.setComerciante(comerciante);
+        //                            loja.salvar();
 
+
+    }
+
+    private void verificaCardapio(){
 
     }
 
@@ -175,6 +212,9 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                 latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(latLng).title("Minha Posição"));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                loja.setLatitude(latLng.latitude);
+                loja.setLongitude(latLng.longitude);
+
 
             }
 
@@ -195,6 +235,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         btnOnline = findViewById(R.id.btnOnline);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
+        btnCadastrar = findViewById(R.id.btnCadastrar);
 
 
     }
