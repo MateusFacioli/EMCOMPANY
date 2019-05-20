@@ -14,12 +14,10 @@ import android.widget.Button;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -120,7 +118,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
             @Override
             public void onClick(View v) {
 
-                enviaParaCadastro();
+                enviaParaCardapio();
 
 
 
@@ -131,7 +129,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
     }
 
-    private void enviaParaCadastro(){
+    private void enviaParaCardapio(){
 
 
        if(mUser != null){
@@ -219,8 +217,8 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         if (mLastLocation != null) {
             if(mMap != null){
                 latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(latLng).title("Minha Posição"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+               // mMap.addMarker(new MarkerOptions().position(latLng).title("Minha Posição"));
+                // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
                 loja.setLatitude(latLng.latitude);
                 loja.setLongitude(latLng.longitude);
 
