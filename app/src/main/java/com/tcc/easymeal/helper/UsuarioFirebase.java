@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.tcc.easymeal.activity.ComercianteActivity;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.model.Comerciante;
 
@@ -83,7 +84,7 @@ public class UsuarioFirebase {
                     Comerciante comerciante = dataSnapshot.getValue( Comerciante.class );
 
 
-                        Intent i = new Intent(activity, NavComercianteActivity.class);
+                        Intent i = new Intent(activity, ComercianteActivity.class);
                         activity.startActivity(i);
 
 

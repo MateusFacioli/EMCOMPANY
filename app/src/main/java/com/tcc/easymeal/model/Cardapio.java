@@ -3,10 +3,21 @@ package com.tcc.easymeal.model;
 public class Cardapio {
 
     private String nome;
-    private String preço;
-    private String itens;
+    private Double preco;
+    private String descricao;
+    private String imgUrl;
 
     public Cardapio() {
+    }
+
+
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getNome() {
@@ -17,19 +28,19 @@ public class Cardapio {
         this.nome = nome;
     }
 
-    public String getPreço() {
-        return preço;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setPreço(String preço) {
-        this.preço = preço;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
-    public String getItens() {
-        return itens;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setItens(String itens) {
-        this.itens = itens;
+    public void setDescricao(String itens) {
+        this.descricao = itens;
     }
 }

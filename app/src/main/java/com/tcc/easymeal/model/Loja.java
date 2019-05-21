@@ -2,6 +2,7 @@ package com.tcc.easymeal.model;
 
 import com.google.firebase.database.DatabaseReference;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
+import com.tcc.easymeal.helper.UsuarioFirebase;
 
 import java.io.Serializable;
 
@@ -19,7 +20,7 @@ public class Loja implements Serializable {
     public void salvar(){
 
                 DatabaseReference database = ConfiguracaoFirebase.getFirebaseDatabase();
-                DatabaseReference reference = database.child("loja").child(comerciante.getCpf());
+                DatabaseReference reference = database.child("loja").child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
 
                 reference.setValue(this);
 

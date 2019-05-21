@@ -49,9 +49,15 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
     implementation 'com.google.android.gms:play-services-places:16.0.0'
+    implementation 'com.google.firebase:firebase-storage:15.0.0'
 
     //accountKit
     implementation 'com.facebook.android:account-kit-sdk:4.+'
+
+    //materal
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    /*Picasso*/
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
 apply plugin: 'com.google.gms.google-services'

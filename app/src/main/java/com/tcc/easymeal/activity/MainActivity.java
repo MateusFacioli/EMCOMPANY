@@ -34,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
     //code
     public static int APP_REQUEST_CODE = 1;
     private String [] permissoes = new String[]{
-            Manifest.permission.ACCESS_FINE_LOCATION
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
     };
 
     @Override
