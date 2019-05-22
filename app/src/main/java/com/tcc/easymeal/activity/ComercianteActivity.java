@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -84,29 +85,23 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                     .build();
         }
 
-    //    btnOnline.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                if(latLng!=null){
-        //                    if(!cardapio.getNome().isEmpty()) {
-        //                        if(!cardapio.getPreço().isEmpty()){
-        //                            if(!cardapio.getItens().isEmpty()){
-        //
-        //                                pegarDadosUsuario();
-        //                                loja.salvar();
-        //
-        //                            }else {
-        //                                Toast.makeText(ComercianteActivity.this, "Preencha o cardapio", Toast.LENGTH_SHORT).show();
-        //                            }
-        //                        }
-        //
-        //                    }
-        //
-        //                  //  btnOnline.setBackgroundColor(Color.blue(2));
-        //                }
-        //
-        //            }
-        //        });
+      btnOnline.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+
+                        loja.setLatitude(latLng.latitude);
+                        loja.setLongitude(latLng.longitude);
+
+
+                        DatabaseReference localRef = firebaseRef.child("loja")
+                                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
+                        
+
+                        //  btnOnline.setBackgroundColor(Color.blue(2));
+                    }
+                });
 
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,8 +216,8 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                 latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(latLng).title("Minha Posição"));
                  mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
-                loja.setLatitude(latLng.latitude);
-                loja.setLongitude(latLng.longitude);
+              loja.setLatitude(latLng.latitude);
+              loja.setLongitude(latLng.longitude);
 
 
             }
