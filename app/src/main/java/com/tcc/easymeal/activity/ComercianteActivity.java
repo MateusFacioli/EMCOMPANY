@@ -89,15 +89,11 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                     @Override
                     public void onClick(View v) {
 
-
-
                         loja.setLatitude(latLng.latitude);
                         loja.setLongitude(latLng.longitude);
 
 
-                        DatabaseReference localRef = firebaseRef.child("loja")
-                                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
-                        
+
 
                         //  btnOnline.setBackgroundColor(Color.blue(2));
                     }
@@ -216,8 +212,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                 latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(latLng).title("Minha Posição"));
                  mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
-              loja.setLatitude(latLng.latitude);
-              loja.setLongitude(latLng.longitude);
+
 
 
             }
