@@ -21,7 +21,7 @@ public class Comerciante implements Serializable {
 
     public void salvar(){
         DatabaseReference database = ConfiguracaoFirebase.getFirebaseDatabase();
-        DatabaseReference reference = database.child("comerciante").child(getCpf());
+        DatabaseReference reference = database.child("comerciante").child(getUid());
 
         reference.setValue(this);
     }

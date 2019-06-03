@@ -26,7 +26,7 @@ import com.tcc.easymeal.R;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.helper.UsuarioFirebase;
 import com.tcc.easymeal.model.Cardapio;
-import com.tcc.easymeal.model.Loja;
+
 
 import java.io.ByteArrayOutputStream;
 
@@ -45,7 +45,7 @@ public class CardapioActivity extends AppCompatActivity {
     private String urlImagemSelecionada;
     private Button validarDadosEmpresa;
     private Toolbar toolbar;
-    private Loja loja = new Loja();
+    private Cardapio cardapio = new Cardapio();
 
     private ImageButton imageButtonCamera;
     private ImageButton imageButtonGaleria;
@@ -71,10 +71,7 @@ public class CardapioActivity extends AppCompatActivity {
         inicializarComponentes();
 
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            loja = (Loja) bundle.getSerializable("loja");
-        }
+
 
 
         validarDadosEmpresa.setOnClickListener(new View.OnClickListener() {
@@ -188,13 +185,12 @@ public class CardapioActivity extends AppCompatActivity {
             if (!descricao.isEmpty()) {
                 if (!preco.isEmpty()) {
 
-                    Cardapio cardapio = new Cardapio();
+
                     cardapio.setNome(nome);
                     cardapio.setDescricao(descricao);
                     cardapio.setPreco(Double.parseDouble(preco));
                     cardapio.setImgUrl(urlImagemSelecionada);
-                    loja.setCardapio(cardapio);
-                    loja.salvar();
+                    cardapio.salvar();
                     finish();
                     exibirMensagem("Produto Salvo com sucesso");
 

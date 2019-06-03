@@ -1,6 +1,6 @@
 package com.tcc.easymeal.activity;
 
-import android.Manifest;
+    import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -33,7 +34,8 @@ import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.helper.UsuarioFirebase;
 import com.tcc.easymeal.model.Cardapio;
 import com.tcc.easymeal.model.Comerciante;
-import com.tcc.easymeal.model.Loja;
+import com.tcc.easymeal.model.Localizacao;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +58,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
     private Button btnCadastrar;
     private Comerciante comerciante = new Comerciante();
     private Cardapio cardapio = new Cardapio();
-    private Loja loja = new Loja();
+    private Localizacao localizacao = new Localizacao();
 
 
 
@@ -84,29 +86,13 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                     .build();
         }
 
-    //    btnOnline.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                if(latLng!=null){
-        //                    if(!cardapio.getNome().isEmpty()) {
-        //                        if(!cardapio.getPreço().isEmpty()){
-        //                            if(!cardapio.getItens().isEmpty()){
-        //
-        //                                pegarDadosUsuario();
-        //                                loja.salvar();
-        //
-        //                            }else {
-        //                                Toast.makeText(ComercianteActivity.this, "Preencha o cardapio", Toast.LENGTH_SHORT).show();
-        //                            }
-        //                        }
-        //
-        //                    }
-        //
-        //                  //  btnOnline.setBackgroundColor(Color.blue(2));
-        //                }
-        //
-        //            }
-        //        });
+       btnOnline.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               localizacao.salvar();
+           }
+       });
+
 
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +106,8 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
             @Override
             public void onClick(View v) {
 
-                enviaParaCardapio();
+                Intent cadastrar = new Intent(ComercianteActivity.this, CardapioActivity.class);
+                startActivity(cadastrar);
 
 
 
@@ -131,7 +118,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
     }
 
-    private void enviaParaCardapio(){
+  /**  private void enviaParaCardapio(){
 
 
        if(mUser != null){
@@ -151,13 +138,13 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                    comerciante = lista.get(0);
                    loja.setComerciante(comerciante);
 
-                   Intent cadastrar = new Intent(ComercianteActivity.this, CardapioActivity.class);
+
 
                    Bundle bundle = new Bundle();
                    bundle.putSerializable("loja", loja);
                    cadastrar.putExtras(bundle);
 
-                   startActivity(cadastrar);
+
 
 
 
@@ -170,6 +157,8 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                }
            });
 
+
+
        }
 
 
@@ -181,7 +170,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         //                            loja.salvar();
 
 
-    }
+    }**/
 
     private void verificaCardapio(){
 
@@ -221,8 +210,8 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                 latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(latLng).title("Minha Posição"));
                  mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
-                loja.setLatitude(latLng.latitude);
-                loja.setLongitude(latLng.longitude);
+                localizacao.setLatitude(latLng.latitude);
+                localizacao.setLongitude(latLng.longitude);
 
 
             }
