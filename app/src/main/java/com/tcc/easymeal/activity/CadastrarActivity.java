@@ -20,11 +20,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.tcc.easymeal.model.Comerciante;
 import com.tcc.easymeal.R;
-
-
+import com.tcc.easymeal.model.ValidaCPF;
 
 
 public class CadastrarActivity extends AppCompatActivity {
@@ -48,7 +50,7 @@ public class CadastrarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         inicializarComponenetes();
 
         btnFloatNext.setOnClickListener(new View.OnClickListener() {
@@ -107,15 +109,19 @@ public class CadastrarActivity extends AppCompatActivity {
                 if(!email.isEmpty()){
                     if(!telefone.isEmpty()){
                         if(!senha.isEmpty()){
+                            if(ValidaCPF.isCPF(cpf)) {
 
-                            comerciante.setNome(nome);
-                            comerciante.setCpf(cpf);
-                            comerciante.setEmail(email);
-                            comerciante.setTelefone(telefone);
-                            comerciante.setSenha(senha);
+                                comerciante.setNome(nome);
+                                comerciante.setCpf(cpf);
+                                comerciante.setEmail(email);
+                                comerciante.setTelefone(telefone);
+                                comerciante.setSenha(senha);
 
 
-                            criaUsuarioFirebase(email, senha);
+                                criaUsuarioFirebase(email, senha);
+                            }else {
+                                Toast.makeText(this, "CPF INVALIDO!!", Toast.LENGTH_SHORT).show();
+                            }
 
                         }else{
                             Toast.makeText(this, "Preencha o campo Senha", Toast.LENGTH_SHORT).show();
@@ -147,20 +153,37 @@ public class CadastrarActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TagCerta", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            comerciante.setUid(user.getUid());
-                            comerciante.salvar();
-                            Intent inicio = new Intent(CadastrarActivity.this, ComercianteActivity.class);
-                            startActivity(inicio);
-                            finish();
+                         try{
+                             // Sign in success, update UI with the signed-in user's information
+                             Log.d("TagCerta", "createUserWithEmail:success");
+                             FirebaseUser user = mAuth.getCurrentUser();
+                             comerciante.setUid(user.getUid());
+                             comerciante.salvar();
+                             Intent inicio = new Intent(CadastrarActivity.this, ComercianteActivity.class);
+                             startActivity(inicio);
+                             finish();
+                         }catch (Exception e){
+                             e.printStackTrace();
+                         }
 
 
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TagErrada", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(CadastrarActivity.this, "Authentication failed.",
+                            String excecao = "";
+                            try {
+                                throw task.getException();
+                            }catch ( FirebaseAuthWeakPasswordException e){
+                                excecao = "Digite uma senha mais forte!";
+                            }catch ( FirebaseAuthInvalidCredentialsException e){
+                                excecao= "Por favor, digite um e-mail válido";
+                            }catch ( FirebaseAuthUserCollisionException e){
+                                excecao = "Este conta já foi cadastrada";
+                            }catch (Exception e){
+                                excecao = "Erro ao cadastrar usuário: "  + e.getMessage();
+                                e.printStackTrace();
+                            }
+
+                            Toast.makeText(CadastrarActivity.this,
+                                    excecao,
                                     Toast.LENGTH_SHORT).show();
 
                         }

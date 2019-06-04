@@ -65,7 +65,7 @@ public class CardapioActivity extends AppCompatActivity {
 
         //toolbar.setTitle("Cadastro");
         //setSupportActionBar(toolbar);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
 
         inicializarComponentes();
@@ -179,20 +179,25 @@ public class CardapioActivity extends AppCompatActivity {
         String nome = editNomeProduto.getText().toString();
         String descricao = editDescricao.getText().toString();
         String preco = editPreco.getText().toString();
+        Double precoD = Double.valueOf(preco);
 
 
         if (!nome.isEmpty()) {
             if (!descricao.isEmpty()) {
                 if (!preco.isEmpty()) {
+                    if(precoD > 0) {
 
 
-                    cardapio.setNome(nome);
-                    cardapio.setDescricao(descricao);
-                    cardapio.setPreco(Double.parseDouble(preco));
-                    cardapio.setImgUrl(urlImagemSelecionada);
-                    cardapio.salvar();
-                    finish();
-                    exibirMensagem("Produto Salvo com sucesso");
+                        cardapio.setNome(nome);
+                        cardapio.setDescricao(descricao);
+                        cardapio.setPreco(Double.parseDouble(preco));
+                        cardapio.setImgUrl(urlImagemSelecionada);
+                        cardapio.salvar();
+                        finish();
+                        exibirMensagem("Produto Salvo com sucesso");
+                    }else {
+                        exibirMensagem("Digite um valor maior que zero");
+                    }
 
 
                 } else {

@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+    import android.view.Menu;
+    import android.view.MenuInflater;
+    import android.view.MenuItem;
+    import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+    import android.support.v7.widget.Toolbar;
 
-import com.google.android.gms.common.ConnectionResult;
+    import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -53,12 +57,11 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
     private Location mLastLocation;
     private PlacesClient placesClient;
     private LatLng latLng;
-    private Button btnOnline;
-    private Button btnSair;
-    private Button btnCadastrar;
     private Comerciante comerciante = new Comerciante();
     private Cardapio cardapio = new Cardapio();
     private Localizacao localizacao = new Localizacao();
+
+    private Toolbar toolbar;
 
 
 
@@ -68,6 +71,8 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         setContentView(R.layout.activity_comerciante);
 
         inicializarComponentes();
+
+
 
 
 
@@ -86,33 +91,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                     .build();
         }
 
-       btnOnline.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               localizacao.salvar();
-           }
-       });
 
-
-        btnSair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                finish();
-            }
-        });
-
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent cadastrar = new Intent(ComercianteActivity.this, CardapioActivity.class);
-                startActivity(cadastrar);
-
-
-
-            }
-        });
 
 
 
@@ -228,13 +207,49 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_comerciante, menu);
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menuCadastrarCardapio:
+                Intent cadastrar = new Intent(ComercianteActivity.this, CardapioActivity.class);
+                startActivity(cadastrar);
+                break;
+
+            case R.id.menuOnline:
+                localizacao.salvar();
+                break;
+
+            case R.id.menuOffiline:
+                localizacao.remover();
+                break;
+
+            case R.id.menuSair:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void inicializarComponentes(){
 
-        btnOnline = findViewById(R.id.btnOnline);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
-        btnCadastrar = findViewById(R.id.btnCadastrar);
-        btnSair = findViewById(R.id.btnSair);
+        toolbar = findViewById(R.id.toolbarComerciante);
+        toolbar.setTitle("Bem Vindo");
+        setSupportActionBar(toolbar);
 
 
     }
