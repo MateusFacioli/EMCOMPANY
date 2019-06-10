@@ -140,9 +140,16 @@ public class CardapioActivity extends AppCompatActivity {
                 if(imagen != null){
                     imageProduto.setImageBitmap(imagen);
 
+                    DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
+                    DatabaseReference produtoRef = firebaseRef
+                            .child("Cardapio")
+                            .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
+                    String idPedido =  produtoRef.push().getKey();
+
                     StorageReference imagemRef = storageReference
                             .child("cardapio")
                             .child(UsuarioFirebase.getUsuarioAtual().getUid())
+                            .child(idPedido)
                             .child("produto.jpeg");
 
 
