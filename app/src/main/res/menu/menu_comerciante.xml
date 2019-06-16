@@ -14,6 +14,9 @@
         android:id="@+id/menuOffiline"
         android:title="Offiline" />
     <item
+        android:id="@+id/menuPedidos"
+        android:title="Pedidos" />
+    <item
         android:id="@+id/menuSair"
         android:title="Sair" />
 </menu>

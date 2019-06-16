@@ -33,6 +33,16 @@ public class Cardapio {
 
         reference.setValue(this);
     }
+    public void remover(){
+        DatabaseReference database = ConfiguracaoFirebase.getFirebaseDatabase();
+        DatabaseReference reference = database
+                .child("cardapio")
+                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid())
+                .child(getIdProduto());
+
+        reference.removeValue();
+    }
+
 
 
     public String getIdProduto() {

@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.tcc.easymeal.activity.ComercianteActivity;
+import com.tcc.easymeal.activity.PedidosActivity;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.model.Comerciante;
 

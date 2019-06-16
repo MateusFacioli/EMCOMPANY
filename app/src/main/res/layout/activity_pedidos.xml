@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LojaActivity">
+    tools:context=".activity.PedidosActivity">
 
-    <include layout="@layout/toolbar_loja"/>
+    <include layout="@layout/toolbar_pedidos"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerProdutos"
+        android:id="@+id/recyclerPedidos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"

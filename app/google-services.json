@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:605243143793:android:aea5c2f9f54586c2",
+        "android_client_info": {
+          "package_name": "com.izi.tcccliente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605243143793-e1n6juprmtrvf7q9et2ubem11alh2qou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.izi.tcccliente",
+            "certificate_hash": "bc03b6a96213a64e099adb8cdba6b9bec515eba8"
+          }
+        },
+        {
+          "client_id": "605243143793-u0b21o7dgl84so1ekicrtj60uflm3jg9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB76PrE6zTlm1IEee_n2Crwj9QCGI4PBdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605243143793-u0b21o7dgl84so1ekicrtj60uflm3jg9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:605243143793:android:c3a1f79f6a5ffda5",
         "android_client_info": {
           "package_name": "com.tcc.easymeal"

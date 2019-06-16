@@ -1,10 +1,14 @@
 package com.tcc.easymeal.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -12,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.adapter.AdapterProduto;
@@ -28,35 +33,27 @@ public class LojaActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private RecyclerView recyclerProdutos;
     private AdapterProduto adapterProduto;
+
     private List<Cardapio> produtos = new ArrayList<>();
     private DatabaseReference firebaseRef;
     private String idUsuarioLogado;
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loja);
 
-        //Configurações Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Loja");
-        //setSupportActionBar(toolbar);
-        //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Configurações iniciais
         inicializarComponentes();
-        autenticacao = ConfiguracaoFirebase.getFirebaseInstance();
-        firebaseRef = ConfiguracaoFirebase.getFirebase();
-        idUsuarioLogado = UsuarioFirebase.getDadosUsuarioLogado().getUid();
+        configurarComponentes();
 
-        //Configura recyclerview
-        recyclerProdutos.setLayoutManager(new LinearLayoutManager(this));
-        recyclerProdutos.setHasFixedSize(true);
-        adapterProduto = new AdapterProduto(produtos, this);
-        recyclerProdutos.setAdapter( adapterProduto );
 
         //Recupera produtos para empresa
         recuperarProdutos();
+      //  teste();
 
         //Adiciona evento de clique no recyclerview
         recyclerProdutos.addOnItemTouchListener(
@@ -71,13 +68,8 @@ public class LojaActivity extends AppCompatActivity {
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                              /* Cardapio produtoSelecionado = produtos.get(position);
-                                produtoSelecionado.remover();
-                                Toast.makeText(LojaActivity.this,
-                                        "Produto excluído com sucesso!",
-                                        Toast.LENGTH_SHORT)
-                                        .show();
-                                        */
+                             Cardapio produtoSelecionado = produtos.get(position);
+                             produtoSelecionado.remover();
                             }
 
 
@@ -119,8 +111,8 @@ public class LojaActivity extends AppCompatActivity {
     private void recuperarProdutos(){
 
         DatabaseReference produtosRef = firebaseRef
-                .child("loja")
-                .child( idUsuarioLogado );
+                .child("cardapio")
+                .child( UsuarioFirebase.getDadosUsuarioLogado().getUid() );
 
         produtosRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -143,10 +135,70 @@ public class LojaActivity extends AppCompatActivity {
 
     }
 
-    public void Salvar(View view) {
+    private void teste(){
+
+        Query produtosRef = firebaseRef
+                .child("pedidos")
+                .orderByChild("comerciante/uid").equalTo(UsuarioFirebase.getDadosUsuarioLogado().getUid());
+
+
+        produtosRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                produtos.clear();
+
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    produtos.add( ds.getValue(Cardapio.class) );
+                }
+
+                adapterProduto.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_cardapio, menu);
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menuAcicionarItem:
+                Intent cadastrar = new Intent(LojaActivity.this, CardapioActivity.class);
+                startActivity(cadastrar);
+                break;
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void configurarComponentes(){
+        recyclerProdutos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerProdutos.setHasFixedSize(true);
+        adapterProduto = new AdapterProduto(produtos);
+        recyclerProdutos.setAdapter( adapterProduto );
     }
 
     private void inicializarComponentes(){
         recyclerProdutos = findViewById(R.id.recyclerProdutos);
+        autenticacao = ConfiguracaoFirebase.getFirebaseInstance();
+        firebaseRef = ConfiguracaoFirebase.getFirebase();
+        idUsuarioLogado = UsuarioFirebase.getDadosUsuarioLogado().getUid();
+        toolbar = findViewById(R.id.toolbarLoja);
+        toolbar.setTitle("Produtos");
+        setSupportActionBar(toolbar);
     }
 }

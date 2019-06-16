@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.model.Cardapio;
 
@@ -16,11 +18,11 @@ import java.util.List;
 public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHolder>{
 
     private List<Cardapio> produtos;
-    private Context context;
 
-    public AdapterProduto(List<Cardapio> produtos, Context context) {
+
+    public AdapterProduto(List<Cardapio> produtos) {
         this.produtos = produtos;
-        this.context = context;
+
     }
 
     @NonNull
@@ -36,6 +38,10 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         holder.nome.setText(produto.getNome());
         holder.descricao.setText(produto.getDescricao());
         holder.valor.setText("R$ " + produto.getPreco());
+
+        //Carregar imagem
+        String urlImagem = produto.getImgUrl();
+        Picasso.get().load( urlImagem ).into( holder.imgProduto );
     }
 
     @Override
@@ -45,6 +51,7 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
+        ImageView imgProduto;
         TextView nome;
         TextView descricao;
         TextView valor;
@@ -52,9 +59,10 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            nome = itemView.findViewById(R.id.textNomeRefeicao);
-            descricao = itemView.findViewById(R.id.textDescricaoRefeicao);
-            valor = itemView.findViewById(R.id.textPreco);
+            nome = itemView.findViewById(R.id.txtNomeProduto);
+            descricao = itemView.findViewById(R.id.txtDescricao);
+            valor = itemView.findViewById(R.id.txtPreco);
+            imgProduto = itemView.findViewById(R.id.imageProduto);
         }
     }
 }
