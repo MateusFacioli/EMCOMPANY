@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    android:background="@color/quantum_amberA100"
+    tools:context=".activity.MainActivity"
+    android:elevation="10dp">
 
     <Button
         android:id="@+id/btnLogar"
+        style="@android:style/Widget.DeviceDefault.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -15,7 +18,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="sans-serif-medium"
+        android:shadowColor="#FD000000"
         android:text="Login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FD000000"
         app:layout_constraintBottom_toTopOf="@+id/btnCadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,18 +34,61 @@
 
     <Button
         android:id="@+id/btnCadastrar"
+        style="@android:style/Widget.DeviceDefault.Button.Borderless"
+        android:background="@drawable/button_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Cadastrar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FD000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogar" />
+
+    <ImageView
+        android:id="@+id/image_logo"
+        android:layout_width="161dp"
+        android:layout_height="135dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#E85758"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logoeasymeal" />
+
+    <TextView
+        android:id="@+id/texto_apresentacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="monospace"
+        android:text="Seja bem vindo ao EasyMeal"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#F50C0C0C"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_logo"
+        app:layout_constraintVertical_bias="0.275" />
 
 </android.support.constraint.ConstraintLayout>

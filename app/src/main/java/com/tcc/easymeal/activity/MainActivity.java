@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.accountkit.AccountKit;
@@ -20,6 +23,8 @@ import com.tcc.easymeal.R;
 import com.tcc.easymeal.helper.UsuarioFirebase;
 import com.tcc.easymeal.model.Permissoes;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     //layout
     private Button btnLogin;
     private Button btnCadastrar;
+    private TextView texto;
+
+    Animation aparece;
+    Animation some;
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -37,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
+
     };
 
     @Override
@@ -48,7 +58,37 @@ public class MainActivity extends AppCompatActivity {
         inicializarComponenetes();
         UsuarioFirebase.redirecionaUsuarioLogado(MainActivity.this);
 
+        texto =findViewById(R.id.texto_apresentacao);
 
+        some = new AlphaAnimation(1,0);
+
+        some.setDuration(2000);
+
+
+        some.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                texto.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                texto.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                texto.startAnimation(some);
+            }
+        },2000);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
