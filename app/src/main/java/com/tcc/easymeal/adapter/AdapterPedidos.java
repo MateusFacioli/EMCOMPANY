@@ -18,7 +18,7 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.MyViewHo
     private List<Pedidos> pedido;
 
     public AdapterPedidos(List<Pedidos> pedidos){
-        this.pedido = pedidos;
+        this.pedido = pedidos; //tamanho zero aqui
     }
 
     @NonNull

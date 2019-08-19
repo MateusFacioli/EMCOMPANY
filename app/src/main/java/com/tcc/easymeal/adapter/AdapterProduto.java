@@ -1,14 +1,17 @@
 package com.tcc.easymeal.adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.snapshot.Index;
 import com.squareup.picasso.Picasso;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.model.Cardapio;
@@ -55,14 +58,52 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         TextView nome;
         TextView descricao;
         TextView valor;
+        Button delete;
+        Button edit;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            nome = itemView.findViewById(R.id.txtNomeProduto);
-            descricao = itemView.findViewById(R.id.txtDescricao);
-            valor = itemView.findViewById(R.id.txtPreco);
-            imgProduto = itemView.findViewById(R.id.imageProduto);
+            nome = itemView.findViewById(R.id.txtNomeProdutoPedido);
+            descricao = itemView.findViewById(R.id.txtDescricaoPedido);
+            valor = itemView.findViewById(R.id.txtPrecoPedido);
+            imgProduto = itemView.findViewById(R.id.imageProdutoPedido);
+            delete   =itemView.findViewById(R.id.delete);
+            edit =itemView.findViewById(R.id.edit);
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar snackbar;
+                    snackbar =Snackbar.make(v,"Quer realmente deletar esse produto?",Snackbar.LENGTH_INDEFINITE);
+                    snackbar.show();
+
+                    snackbar.setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                       Log.d("meuLog","Clicou na acao remover");
+                        }
+                    });
+                }
+            });
+
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar snackbar;
+                    snackbar =Snackbar.make(v,"Quer realmente editar esse produto?",Snackbar.LENGTH_INDEFINITE);
+                    snackbar.show();
+
+                    snackbar.setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.d("meuLog","Clicou na acao para editar");
+                        }
+                    });
+
+                }
+            });
+
         }
     }
 }

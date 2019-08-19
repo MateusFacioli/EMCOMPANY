@@ -1,16 +1,21 @@
 package com.tcc.easymeal.activity;
 
     import android.Manifest;
-import android.content.Intent;
+    import android.content.DialogInterface;
+    import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+    import android.support.design.widget.Snackbar;
     import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+    import android.support.v7.app.AlertDialog;
+    import android.support.v7.app.AppCompatActivity;
     import android.view.Menu;
     import android.view.MenuInflater;
     import android.view.MenuItem;
     import android.support.v7.widget.Toolbar;
+    import android.view.View;
+    import android.widget.Toast;
 
     import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -22,7 +27,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.firebase.auth.FirebaseAuth;
+    import com.google.firebase.FirebaseApp;
+    import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
     import com.google.firebase.database.DatabaseReference;
     import com.tcc.easymeal.R;
@@ -47,6 +53,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
     private Comerciante comerciante = new Comerciante();
     private Cardapio cardapio = new Cardapio();
     private Localizacao localizacao = new Localizacao();
+    private AlertDialog alerta;
 
     private Toolbar toolbar;
 
@@ -203,7 +210,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+ int n;
         switch (item.getItemId()){
             case R.id.menuCadastrarCardapio:
                 Intent cadastrar = new Intent(ComercianteActivity.this, LojaActivity.class);
@@ -211,33 +218,115 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                 break;
 
             case R.id.menuOnline:
-                localizacao.salvar();
+                n=1;
+                Msg_alertas("Deseja ficar online para que os clientes possam te encontrar?", n);
                 break;
 
             case R.id.menuOffiline:
-                localizacao.remover();
+                 n=2;
+                Msg_alertas("Só é possível ficar indisponível para os clientes depois de entregar todos os pedidos",n);
                 break;
 
             case R.id.menuPedidos:
-                Intent pedidos = new Intent(ComercianteActivity.this,PedidosActivity.class);
-                startActivity(pedidos);
+                 n=3;
+                Msg_alertas("Seus pedidos restantes para entregar",n);
                 break;
 
             case R.id.menuSair:
-                FirebaseAuth.getInstance().signOut();
-                finish();
+                 n=4;
+                Msg_alertas("Deseja sair do sistema ?",n);
                 break;
 
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void Msg_alertas(String texto, int n) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("AVISO");
+        builder.setMessage(texto);
+
+   switch (n)
+   {
+       case 1:
+           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int which) {
+                   localizacao.salvar();
+               }
+           });
+           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface arg0, int arg1) {
+
+               }
+           });
+           break;
+       case 2:
+           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int which) {
+                   localizacao.remover();
+               }
+           });
+           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface arg0, int arg1) {
+
+               }
+           });
+           break;
+       case 3:
+           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int which) {
+                   Intent pedidos = new Intent(ComercianteActivity.this,PedidosActivity.class);
+                   startActivity(pedidos);
+               }
+           });
+           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface arg0, int arg1) {
+
+               }
+           });
+           break;
+       case 4:
+           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int which) {
+                   localizacao.remover();
+                   FirebaseAuth.getInstance().signOut();
+                   finish();
+               }
+           });
+           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface arg0, int arg1) {
+
+               }
+           });
+           break;
+
+
+   }
+
+
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
+
     private void inicializarComponentes(){
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
+        String mUser2 = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
         toolbar = findViewById(R.id.toolbarComerciante);
-        toolbar.setTitle("Bem Vindo");
+
+            toolbar.setTitle("Bem Vindo "+ mUser2);
+
+
+
+
         setSupportActionBar(toolbar);
 
 

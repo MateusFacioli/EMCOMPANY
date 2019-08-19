@@ -56,7 +56,7 @@ public class LojaActivity extends AppCompatActivity {
       //  teste();
 
         //Adiciona evento de clique no recyclerview
-        recyclerProdutos.addOnItemTouchListener(
+        /*recyclerProdutos.addOnItemTouchListener(
                 new RecyclerItemClickListener(
                         this,
                         recyclerProdutos,
@@ -79,7 +79,7 @@ public class LojaActivity extends AppCompatActivity {
                             }
                         }
                 )
-        );
+        ); */
 
     }
 
@@ -198,7 +198,7 @@ public class LojaActivity extends AppCompatActivity {
         firebaseRef = ConfiguracaoFirebase.getFirebase();
         idUsuarioLogado = UsuarioFirebase.getDadosUsuarioLogado().getUid();
         toolbar = findViewById(R.id.toolbarLoja);
-        toolbar.setTitle("Produtos");
+        toolbar.setTitle(" Seus Produtos Cadastrados");
         setSupportActionBar(toolbar);
     }
 }

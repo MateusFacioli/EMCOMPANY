@@ -295,7 +295,7 @@ public class CardapioActivity extends AppCompatActivity {
         editNomeProduto = findViewById(R.id.editNomeEmpresa);
         editDescricao = findViewById(R.id.editDescricao);
         editPreco = findViewById(R.id.editPreco);
-        imageProduto = findViewById(R.id.imageProduto);
+        imageProduto = findViewById(R.id.imageProdutoPedido);
         validarDadosEmpresa = findViewById(R.id.validarDadosEmpresa);
         imageButtonGaleria = findViewById(R.id.imageButtonGaleria);
         imageButtonCamera = findViewById(R.id.imageButtonCamera);

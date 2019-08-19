@@ -14,7 +14,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.adapter.AdapterPedidos;
-import com.tcc.easymeal.adapter.AdapterProduto;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.helper.UsuarioFirebase;
 import com.tcc.easymeal.model.Cardapio;
@@ -63,7 +62,7 @@ public class PedidosActivity extends AppCompatActivity {
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
                     userIdList.add( ds.getKey());
                 }
-
+                   //recuperarProdutos();
                     recuperarProdutos(userIdList);
 
 
@@ -109,8 +108,6 @@ public class PedidosActivity extends AppCompatActivity {
 
         }
     }
-
-
 
     private void configurarComponentes(){
         recyclerProdutos.setLayoutManager(new LinearLayoutManager(this));
