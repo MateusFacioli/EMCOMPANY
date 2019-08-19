@@ -6,16 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activity.LojaActivity">
 
-    <include layout="@layout/toolbar_loja"/>
+    <include
+        layout="@layout/toolbar_loja"
+        android:background="@color/quantum_amberA100" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerProdutos"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="70dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/quantum_amberA100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
