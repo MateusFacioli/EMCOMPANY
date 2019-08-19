@@ -70,10 +70,6 @@ public class CardapioActivity extends AppCompatActivity {
 
         inicializarComponentes();
 
-
-
-
-
         validarDadosEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +138,7 @@ public class CardapioActivity extends AppCompatActivity {
 
                     DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
                     DatabaseReference produtoRef = firebaseRef
-                            .child("Cardapio")
+                            .child("produto")
                             .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
                     String idPedido =  produtoRef.push().getKey();
 
