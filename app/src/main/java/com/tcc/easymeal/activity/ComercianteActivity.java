@@ -263,6 +263,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
            });
            break;
        case 2:
+
            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                @Override
                public void onClick(DialogInterface dialog, int which) {
