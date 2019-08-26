@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerProdutos"
         android:layout_width="0dp"
@@ -38,4 +39,30 @@
         app:layout_constraintTop_toBottomOf="@+id/include"
         app:layout_constraintVertical_bias="0.035" />
 
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/add_produto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:onClick="add_produto"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerProdutos"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu_colorNormal="@color/quantum_white_100"
+        app:menu_fab_label="Adicione um produto"
+        app:menu_icon="@drawable/add"
+        app:menu_labels_cornerRadius="8dp">
+
+    </com.github.clans.fab.FloatingActionMenu>
 </android.support.constraint.ConstraintLayout>

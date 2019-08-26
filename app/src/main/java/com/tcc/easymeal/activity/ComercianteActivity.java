@@ -1,13 +1,19 @@
 package com.tcc.easymeal.activity;
 
     import android.Manifest;
+    import android.animation.Animator;
+    import android.animation.AnimatorListenerAdapter;
+    import android.animation.AnimatorSet;
+    import android.animation.ObjectAnimator;
     import android.content.DialogInterface;
     import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
+    import android.graphics.drawable.Drawable;
+    import android.location.Location;
 import android.os.Bundle;
     import android.support.design.widget.Snackbar;
     import android.support.v4.app.ActivityCompat;
+    import android.support.v4.content.ContextCompat;
     import android.support.v7.app.AlertDialog;
     import android.support.v7.app.AppCompatActivity;
     import android.view.Menu;
@@ -17,6 +23,7 @@ import android.os.Bundle;
     import android.view.View;
     import android.widget.Toast;
 
+    import com.github.clans.fab.FloatingActionMenu;
     import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -54,6 +61,11 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
     private Cardapio cardapio = new Cardapio();
     private Localizacao localizacao = new Localizacao();
     private AlertDialog alerta;
+    private static final int ANIMATION_DURATION = 300;
+    private static final float ROTATION_ANGLE = 90f;
+    private AnimatorSet mOpenAnimatorSet;
+    private AnimatorSet mCloseAnimatorSet;
+    private FloatingActionMenu btn_menu;
 
     private Toolbar toolbar;
 
@@ -66,14 +78,6 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
         inicializarComponentes();
 
-
-
-
-
-       // Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().hide();
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -85,119 +89,60 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                     .build();
         }
 
-
-
-
-
     }
 
-  /**  private void enviaParaCardapio(){
-
-
-       if(mUser != null){
-
-           Comerciante comercianteLogado = UsuarioFirebase.getDadosUsuarioLogado();
-           DatabaseReference dados = firebaseRef.child("comerciante");
-           Query dadosPesquisa = dados.orderByChild("uid").equalTo(comercianteLogado.getUid());
-
-           dadosPesquisa.addValueEventListener(new ValueEventListener() {
-               @Override
-               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   List<Comerciante> lista = new ArrayList<>();
-                   for( DataSnapshot ds: dataSnapshot.getChildren() ){
-                       lista.add( ds.getValue( Comerciante.class ) );
-                   }
-
-                   comerciante = lista.get(0);
-                   loja.setComerciante(comerciante);
-
-
-
-                   Bundle bundle = new Bundle();
-                   bundle.putSerializable("loja", loja);
-                   cadastrar.putExtras(bundle);
-
-
-
-
-
-
-               }
-
-               @Override
-               public void onCancelled(@NonNull DatabaseError databaseError) {
-
-               }
-           });
-
-
-
-       }
-
-
-
-        //String idToken = task.getResult().getToken();
-        //                            Comerciante comerciante = new Comerciante();
-        //                            comerciante.setUid(mUser.getUid());
-        //                            loja.setComerciante(comerciante);
-        //                            loja.salvar();
-
-
-    }**/
-
-
-    protected void onStart() {
+    protected void onStart()
+    {
         mGoogleApiClient.connect();
         super.onStart();
     }
 
-
-    protected void onStop() {
+    protected void onStop()
+    {
         mGoogleApiClient.disconnect();
         super.onStop();
     }
 
-
-
-
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)
+    {
         mMap = googleMap;
-
     }
 
-
     @Override
-    public void onConnected(Bundle bundle) {
+    public void onConnected(Bundle bundle)
+    {
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)
+        { return; }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLastLocation != null) {
-            if(mMap != null){
+        if (mLastLocation != null)
+        {
+            if(mMap != null)
+            {
                 latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(latLng).title("Minha Posição"));
                  mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
                 localizacao.setLatitude(latLng.latitude);
                 localizacao.setLongitude(latLng.longitude);
-
-
             }
-
         }
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
+    public void onConnectionSuspended(int i)
+    {
 
     }
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onConnectionFailed(ConnectionResult connectionResult)
+    {
 
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -240,6 +185,75 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         }
         return super.onOptionsItemSelected(item);
     }
+    */
+
+public void ficaronline(View view)
+{
+    Msg_alertas("Deseja ficar online para que os clientes possam te encontrar?",1);
+}
+
+public void ficaroffline(View view)
+{
+  Msg_alertas("Só é possível ficar indisponível para os clientes depois de entregar todos os pedidos",2);
+}
+
+public void fechartudo (View view)
+{
+    Msg_alertas("Deseja sair do sistema ?",4);
+}
+
+public void vaipedidos(View view)
+{
+    Msg_alertas("Seus pedidos restantes para entregar",3);
+}
+
+public void vaiprodutos(View view)
+{
+    Msg_alertas("Deseja cadastrar ou editar algum produto",5);
+}
+
+
+private void animation()
+    {
+        mOpenAnimatorSet = new AnimatorSet();
+        mCloseAnimatorSet = new AnimatorSet();
+
+        ObjectAnimator collapseAnimator =  ObjectAnimator.ofFloat(btn_menu.getMenuIconView(),
+                "rotation",
+                - 270f  +  ROTATION_ANGLE , 0f );
+        ObjectAnimator expandAnimator = ObjectAnimator.ofFloat(btn_menu.getMenuIconView(),
+                "rotation",
+                0f , - 270f  +  ROTATION_ANGLE );
+        //menu fica 45 graus nao consegui arrumar
+
+        final Drawable plusDrawable = ContextCompat.getDrawable(this,
+                R.drawable.menu);
+        expandAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                btn_menu.getMenuIconView().setImageDrawable(plusDrawable);
+                btn_menu.setIconToggleAnimatorSet(mCloseAnimatorSet);
+            }
+        });
+
+        final Drawable mapDrawable = ContextCompat.getDrawable(this,
+                R.drawable.menu);
+        collapseAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                btn_menu.getMenuIconView().setImageDrawable(mapDrawable);
+                btn_menu.setIconToggleAnimatorSet(mOpenAnimatorSet);
+            }
+        });
+
+        mOpenAnimatorSet.play(expandAnimator);
+        mCloseAnimatorSet.play(collapseAnimator);
+
+        mOpenAnimatorSet.setDuration(ANIMATION_DURATION);
+        mCloseAnimatorSet.setDuration(ANIMATION_DURATION);
+
+        btn_menu.setIconToggleAnimatorSet(mOpenAnimatorSet);
+    }
 
     private void Msg_alertas(String texto, int n) {
 
@@ -249,7 +263,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
    switch (n)
    {
-       case 1:
+       case 1://online
            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                @Override
                public void onClick(DialogInterface dialog, int which) {
@@ -262,7 +276,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                }
            });
            break;
-       case 2:
+       case 2://offline
 
            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                @Override
@@ -276,7 +290,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                }
            });
            break;
-       case 3:
+       case 3://pedidos
            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                @Override
                public void onClick(DialogInterface dialog, int which) {
@@ -290,7 +304,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                }
            });
            break;
-       case 4:
+       case 4://sair
            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                @Override
                public void onClick(DialogInterface dialog, int which) {
@@ -305,9 +319,21 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                }
            });
            break;
+       case 5://produtos
+           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int which) {
+                   Intent cadastrar = new Intent(ComercianteActivity.this, LojaActivity.class);
+                   startActivity(cadastrar);
+               }
+           });
+           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface arg0, int arg1) {
 
-
-   }
+               }
+           });
+           break;
+}
 
 
         //cria o AlertDialog
@@ -325,10 +351,30 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
             toolbar.setTitle("Bem Vindo "+ mUser2);
 
-
-
-
         setSupportActionBar(toolbar);
+        btn_menu=findViewById(R.id.menu_principal);
+        final Drawable originalImage = btn_menu.getMenuIconView().getDrawable();
+        btn_menu.setOnMenuButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (btn_menu.isOpened()) {
+                    // We will change the icon when the menu opens, here we want to change to the previous icon
+                    animation();
+                    btn_menu.close(true);
+                    btn_menu.getMenuIconView().setImageDrawable(originalImage);
+                    //btn_menu.setIconAnimated(false);
+                    //  btn_menu.setAnimation();
+                } else {
+                    // Since it is closed, let's set our new icon and then open the menu
+                    // btn_menu.setIconAnimated(true);
+                    btn_menu.getMenuIconView();
+                    btn_menu.getMenuIconView().setImageDrawable(getResources().getDrawable(R.drawable.menu));
+                    btn_menu.open(true);
+                }
+            }
+        });
+
 
 
     }

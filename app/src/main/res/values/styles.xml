@@ -17,6 +17,16 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="MenuButtonsStyle">
+        <item name="fab_size">normal</item>
+        <item name="fab_shadowColor">#444</item>
+        <item name="elevation">6dp</item>
+        <item name="fab_colorNormal">@android:color/white</item>
+        <item name="fab_colorPressed">@color/colorPrimaryDark</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:elevation">6dp</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
