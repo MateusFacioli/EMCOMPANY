@@ -212,6 +212,11 @@ public void vaiprodutos(View view)
     Msg_alertas("Deseja cadastrar ou editar algum produto",5);
 }
 
+public void vaiscan(View view)
+{
+    Msg_alertas("Deseja escanear um qrcode?",6);
+}
+
 
 private void animation()
     {
@@ -325,6 +330,20 @@ private void animation()
                public void onClick(DialogInterface dialog, int which) {
                    Intent cadastrar = new Intent(ComercianteActivity.this, LojaActivity.class);
                    startActivity(cadastrar);
+               }
+           });
+           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface arg0, int arg1) {
+
+               }
+           });
+           break;
+       case 6://scan
+           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int which) {
+                   Intent Qr_code= new Intent(ComercianteActivity.this, Qr_codeActivity.class);
+                   startActivity(Qr_code);
                }
            });
            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

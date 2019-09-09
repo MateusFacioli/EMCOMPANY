@@ -12,13 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 
-import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +25,6 @@ import com.tcc.easymeal.R;
 import com.tcc.easymeal.adapter.AdapterProduto;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.helper.UsuarioFirebase;
-import com.tcc.easymeal.listener.RecyclerItemClickListener;
 import com.tcc.easymeal.model.Cardapio;
 
 import java.util.ArrayList;
@@ -226,7 +220,7 @@ public class LojaActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarLoja);
         toolbar.setTitle(" Seus Produtos Cadastrados");
         setSupportActionBar(toolbar);
-        btn_add=findViewById(R.id.add_produto);
+        btn_add=findViewById(R.id.Sair);
 
 
         final Drawable originalImage = btn_add.getMenuIconView().getDrawable();

@@ -196,7 +196,7 @@ public class CadastrarActivity extends AppCompatActivity {
 
 
     private void inicializarComponenetes(){
-        inputNome = findViewById(R.id.inputNome);
+        inputNome = findViewById(R.id.input_Descri);
         inputCPF = findViewById(R.id.inputCPF);
         inputEmail = findViewById(R.id.inputEmail);
         txtTelefone = findViewById(R.id.txtTelefone);

@@ -24,10 +24,13 @@
         android:roundIcon="@mipmap/ic_logoeasymeal_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.PedidosActivity"></activity>
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.PedidosActivity" />
         <activity android:name=".activity.LojaActivity" />
-        <activity android:name=".activity.CardapioActivity"
-            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".activity.CardapioActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".activity.Qr_codeActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -57,7 +60,7 @@
         <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
         <activity android:name=".activity.CadastrarActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.CadastrarHorarioActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

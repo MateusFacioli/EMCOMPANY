@@ -46,7 +46,7 @@
         app:menu_labels_cornerRadius="8dp">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/add_produto"
+            android:id="@+id/Sair"
             style="@style/MenuButtonsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,8 +61,29 @@
             android:onClick="fechartudo"
             android:src="@drawable/exit"
             android:visibility="visible"
-            app:fab_label="Sair">
+            app:fab_label="Sair"
+            android:focusable="true">
 
+        </com.github.clans.fab.FloatingActionButton>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/qr_code"
+            style="@style/MenuButtonsStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:onClick="vaiscan"
+            android:src="@drawable/qrcodescan"
+            android:visibility="visible"
+            app:fab_label="Scan qr-code"
+            android:focusable="true">
         </com.github.clans.fab.FloatingActionButton>
 
         <com.github.clans.fab.FloatingActionButton
@@ -81,7 +102,8 @@
             android:onClick="ficaronline"
             android:src="@drawable/lockopen"
             android:visibility="visible"
-            app:fab_label="Ficar Online">
+            app:fab_label="Ficar Online"
+            android:focusable="true">
         </com.github.clans.fab.FloatingActionButton>
 
         <com.github.clans.fab.FloatingActionButton
@@ -100,7 +122,9 @@
             android:onClick="ficaroffline"
             android:src="@drawable/lock"
             android:visibility="visible"
-            app:fab_label="Ficar offline"></com.github.clans.fab.FloatingActionButton>
+            app:fab_label="Ficar offline"
+            android:focusable="true">
+        </com.github.clans.fab.FloatingActionButton>
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/produtos"
@@ -118,7 +142,8 @@
             android:onClick="vaiprodutos"
             android:src="@drawable/ic_add_circle_black_24dp"
             android:visibility="visible"
-            app:fab_label="Produtos">
+            app:fab_label="Produtos"
+            android:focusable="true">
         </com.github.clans.fab.FloatingActionButton>
 
         <com.github.clans.fab.FloatingActionButton
@@ -144,7 +169,8 @@
             android:paddingBottom="8dp"
             android:src="@drawable/gift"
             android:visibility="visible"
-            app:fab_label="Pedidos">
+            app:fab_label="Pedidos"
+            android:focusable="true">
 
         </com.github.clans.fab.FloatingActionButton>
 
