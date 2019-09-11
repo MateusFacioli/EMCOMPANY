@@ -8,13 +8,11 @@
     tools:context=".activity.ComercianteActivity"
     tools:showIn="@layout/activity_comerciante">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +83,27 @@
             app:fab_label="Scan qr-code"
             android:focusable="true">
         </com.github.clans.fab.FloatingActionButton>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/agenda"
+            style="@style/MenuButtonsStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:onClick="vaiagenda"
+            android:src="@drawable/notebook"
+            android:visibility="visible"
+            app:fab_label=""
+            android:focusable="true">
+        </com.github.clans.fab.FloatingActionButton>
+
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/online"

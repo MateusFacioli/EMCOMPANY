@@ -1,30 +1,30 @@
 package com.tcc.easymeal.activity;
 
-    import android.Manifest;
-    import android.animation.Animator;
-    import android.animation.AnimatorListenerAdapter;
-    import android.animation.AnimatorSet;
-    import android.animation.ObjectAnimator;
-    import android.content.DialogInterface;
-    import android.content.Intent;
+import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-    import android.graphics.drawable.Drawable;
-    import android.location.Location;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
-    import android.support.design.widget.Snackbar;
-    import android.support.v4.app.ActivityCompat;
-    import android.support.v4.content.ContextCompat;
-    import android.support.v7.app.AlertDialog;
-    import android.support.v7.app.AppCompatActivity;
-    import android.view.Menu;
-    import android.view.MenuInflater;
-    import android.view.MenuItem;
-    import android.support.v7.widget.Toolbar;
-    import android.view.View;
-    import android.widget.Toast;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Toast;
 
-    import com.github.clans.fab.FloatingActionMenu;
-    import com.google.android.gms.common.ConnectionResult;
+import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,13 +34,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.net.PlacesClient;
-    import com.google.firebase.FirebaseApp;
-    import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-    import com.google.firebase.database.DatabaseReference;
-    import com.tcc.easymeal.R;
+import com.google.firebase.database.DatabaseReference;
+import com.tcc.easymeal.R;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
-    import com.tcc.easymeal.model.Cardapio;
+import com.tcc.easymeal.model.Cardapio;
 import com.tcc.easymeal.model.Comerciante;
 import com.tcc.easymeal.model.Localizacao;
 
@@ -124,7 +124,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
             {
                 latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(latLng).title("Minha Posição"));
-                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
                 localizacao.setLatitude(latLng.latitude);
                 localizacao.setLongitude(latLng.longitude);
             }
@@ -187,38 +187,43 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
     }
     */
 
-public void ficaronline(View view)
-{
-    Msg_alertas("Deseja ficar online para que os clientes possam te encontrar?",1);
-}
+    public void ficaronline(View view)
+    {
+        Msg_alertas("Deseja ficar online para que os clientes possam te encontrar?",1);
+    }
 
-public void ficaroffline(View view)
-{
-  Msg_alertas("Só é possível ficar indisponível para os clientes depois de entregar todos os pedidos",2);
-}
+    public void ficaroffline(View view)
+    {
+        Msg_alertas("Só é possível ficar indisponível para os clientes depois de entregar todos os pedidos",2);
+    }
 
-public void fechartudo (View view)
-{
-    Msg_alertas("Deseja sair do sistema ?",4);
-}
+    public void fechartudo (View view)
+    {
+        Msg_alertas("Deseja sair do sistema ?",4);
+    }
 
-public void vaipedidos(View view)
-{
-    Msg_alertas("Seus pedidos restantes para entregar",3);
-}
+    public void vaipedidos(View view)
+    {
+        Msg_alertas("Seus pedidos restantes para entregar",3);
+    }
 
-public void vaiprodutos(View view)
-{
-    Msg_alertas("Deseja cadastrar ou editar algum produto",5);
-}
+    public void vaiprodutos(View view)
+    {
+        Msg_alertas("Deseja cadastrar ou editar algum produto ?",5);
+    }
 
-public void vaiscan(View view)
-{
-    Msg_alertas("Deseja escanear um qrcode?",6);
-}
+    public void vaiscan(View view)
+    {
+        Msg_alertas("Deseja escanear um qrcode?",6);
+    }
+
+    public void vaiagenda(View view)
+    {
+        Msg_alertas("Deseja cadastrar ou alterar algum horário semanal ?",7);
+    }
 
 
-private void animation()
+    private void animation()
     {
         mOpenAnimatorSet = new AnimatorSet();
         mCloseAnimatorSet = new AnimatorSet();
@@ -266,93 +271,107 @@ private void animation()
         builder.setTitle("AVISO");
         builder.setMessage(texto);
 
-   switch (n)
-   {
-       case 1://online
-           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialog, int which) {
-                   localizacao.salvar();
-               }
-           });
-           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface arg0, int arg1) {
+        switch (n)
+        {
+            case 1://online
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        localizacao.salvar();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-               }
-           });
-           break;
-       case 2://offline
+                    }
+                });
+                break;
+            case 2://offline
 
-           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialog, int which) {
-                   localizacao.remover();
-               }
-           });
-           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface arg0, int arg1) {
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        localizacao.remover();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-               }
-           });
-           break;
-       case 3://pedidos
-           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialog, int which) {
-                   Intent pedidos = new Intent(ComercianteActivity.this,PedidosActivity.class);
-                   startActivity(pedidos);
-               }
-           });
-           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                });
+                break;
+            case 3://pedidos
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent pedidos = new Intent(ComercianteActivity.this,PedidosActivity.class);
+                        startActivity(pedidos);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-               }
-           });
-           break;
-       case 4://sair
-           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialog, int which) {
-                   localizacao.remover();
-                   FirebaseAuth.getInstance().signOut();
-                   finish();
-               }
-           });
-           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                });
+                break;
+            case 4://sair
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        localizacao.remover();
+                        FirebaseAuth.getInstance().signOut();
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-               }
-           });
-           break;
-       case 5://produtos
-           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialog, int which) {
-                   Intent cadastrar = new Intent(ComercianteActivity.this, LojaActivity.class);
-                   startActivity(cadastrar);
-               }
-           });
-           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                });
+                break;
+            case 5://produtos
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent cadastrar = new Intent(ComercianteActivity.this, LojaActivity.class);
+                        startActivity(cadastrar);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-               }
-           });
-           break;
-       case 6://scan
-           builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialog, int which) {
-                   Intent Qr_code= new Intent(ComercianteActivity.this, Qr_codeActivity.class);
-                   startActivity(Qr_code);
-               }
-           });
-           builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                });
+                break;
+            case 6://scan
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent Qr_code= new Intent(ComercianteActivity.this, Qr_codeActivity.class);
+                        startActivity(Qr_code);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-               }
-           });
-           break;
-}
+                    }
+                });
+                break;
+            case 7://agenda
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent agenda= new Intent(ComercianteActivity.this, CadastrarHorarioActivity.class);
+                        startActivity(agenda);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+                break;
+        }
 
 
         //cria o AlertDialog
@@ -368,7 +387,7 @@ private void animation()
         firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
         toolbar = findViewById(R.id.toolbarComerciante);
 
-            toolbar.setTitle("Bem Vindo "+ mUser2);
+        toolbar.setTitle("Bem Vindo "+ mUser2);
 
         setSupportActionBar(toolbar);
         btn_menu=findViewById(R.id.menu_principal);
