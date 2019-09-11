@@ -37,6 +37,8 @@ dependencies {
     implementation 'com.google.zxing:core:3.2.1'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
 
+    // Zxing barcode dependency
+    implementation 'me.dm7.barcodescanner:zxing:1.9.8'
     //firebase
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
