@@ -90,9 +90,6 @@ public class Qr_codeActivity extends AppCompatActivity {
              }
     }
 
-    private void exibirMensagem(String texto){
-        Toast.makeText(this, texto, Toast.LENGTH_SHORT)
-                .show();
-    }
+
 
 }

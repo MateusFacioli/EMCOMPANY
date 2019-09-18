@@ -44,7 +44,7 @@
         app:menu_labels_cornerRadius="8dp">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/Sair"
+            android:id="@+id/add_produto"
             style="@style/MenuButtonsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,11 +97,11 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:clickable="true"
+            android:focusable="true"
             android:onClick="vaiagenda"
             android:src="@drawable/notebook"
             android:visibility="visible"
-            app:fab_label=""
-            android:focusable="true">
+            app:fab_label="Cadastrar horário semanal">
         </com.github.clans.fab.FloatingActionButton>
 
 

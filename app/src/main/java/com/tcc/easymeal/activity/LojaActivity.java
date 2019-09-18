@@ -220,7 +220,8 @@ public class LojaActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarLoja);
         toolbar.setTitle(" Seus Produtos Cadastrados");
         setSupportActionBar(toolbar);
-        btn_add=findViewById(R.id.Sair);
+        btn_add=findViewById(R.id.add_produto);
+        btn_add.setAnimated(false);
 
 
         final Drawable originalImage = btn_add.getMenuIconView().getDrawable();
@@ -230,7 +231,6 @@ public class LojaActivity extends AppCompatActivity {
 
                 if (btn_add.isOpened()) {
                     // We will change the icon when the menu opens, here we want to change to the previous icon
-                    animation();
                     btn_add.close(true);
                     btn_add.getMenuIconView().setImageDrawable(originalImage);
                     add_produto(v);// tem que ser aqui para a pessoa ler o que significa o botao
@@ -247,46 +247,5 @@ public class LojaActivity extends AppCompatActivity {
 
     }
 
-    private void animation()
-    {
-        mOpenAnimatorSet = new AnimatorSet();
-        mCloseAnimatorSet = new AnimatorSet();
-
-        ObjectAnimator collapseAnimator =  ObjectAnimator.ofFloat(btn_add.getMenuIconView(),
-                "rotation",
-                ROTATION_ANGLE , 0f );
-        ObjectAnimator expandAnimator = ObjectAnimator.ofFloat(btn_add.getMenuIconView(),
-                "rotation",
-                0f ,ROTATION_ANGLE );
-
-
-        final Drawable plusDrawable = ContextCompat.getDrawable(this,
-                R.drawable.add);
-        expandAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                btn_add.getMenuIconView().setImageDrawable(plusDrawable);
-                btn_add.setIconToggleAnimatorSet(mCloseAnimatorSet);
-            }
-        });
-
-        final Drawable mapDrawable = ContextCompat.getDrawable(this,
-                R.drawable.add);
-        collapseAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                btn_add.getMenuIconView().setImageDrawable(mapDrawable);
-                btn_add.setIconToggleAnimatorSet(mOpenAnimatorSet);
-            }
-        });
-
-        mOpenAnimatorSet.play(expandAnimator);
-        mCloseAnimatorSet.play(collapseAnimator);
-
-        mOpenAnimatorSet.setDuration(ANIMATION_DURATION);
-        mCloseAnimatorSet.setDuration(ANIMATION_DURATION);
-
-        btn_add.setIconToggleAnimatorSet(mOpenAnimatorSet);
-    }
 
 }

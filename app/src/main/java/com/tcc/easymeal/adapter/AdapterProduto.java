@@ -1,17 +1,15 @@
 package com.tcc.easymeal.adapter;
 
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.google.firebase.database.snapshot.Index;
 import com.squareup.picasso.Picasso;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.model.Cardapio;
@@ -42,6 +40,7 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         holder.descricao.setText(produto.getDescricao());
         holder.valor.setText("R$ " + produto.getPreco());
 
+
         //Carregar imagem
         String urlImagem = produto.getImgUrl();
         Picasso.get().load( urlImagem ).into( holder.imgProduto );
@@ -55,21 +54,21 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgProduto;
-        TextView nome;
-        TextView descricao;
-        TextView valor;
+        EditText nome;
+        EditText descricao;
+        EditText valor;
         Button delete;
         Button edit;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nome = itemView.findViewById(R.id.txtNomeProdutoPedido);
             descricao = itemView.findViewById(R.id.txtDescricaoPedido);
             valor = itemView.findViewById(R.id.txtPrecoPedido);
             imgProduto = itemView.findViewById(R.id.imageProdutoPedido);
-            delete   =itemView.findViewById(R.id.delete);
-            edit =itemView.findViewById(R.id.edit);
+            delete   =itemView.findViewById(R.id.delete_button);
+            edit =itemView.findViewById(R.id.edit_button);
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,33 +76,58 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
                     Snackbar snackbar;
                     snackbar =Snackbar.make(v,"Quer realmente deletar esse produto?",Snackbar.LENGTH_INDEFINITE);
                     snackbar.show();
-
                     snackbar.setAction("OK", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                       Log.d("meuLog","Clicou na acao remover");
+                            Cardapio produtoSelecionado = produtos.get(getAdapterPosition());
+                            produtoSelecionado.remover();
+                            //confirmar a exclusao
                         }
                     });
+
                 }
+
+
             });
 
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar snackbar;
-                    snackbar =Snackbar.make(v,"Quer realmente editar esse produto?",Snackbar.LENGTH_INDEFINITE);
-                    snackbar.show();
 
-                    snackbar.setAction("OK", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Log.d("meuLog","Clicou na acao para editar");
-                        }
-                    });
+                    nome.setEnabled(true);
+                    nome.setClickable(true);
+                    valor.setClickable(true);
+                    valor.setEnabled(true);
+                    descricao.setEnabled(true);
+                    descricao.setClickable(true);
+                    imgProduto.setClickable(true);
+                    imgProduto.setEnabled(true);
+                    String nome2=nome.getText().toString();
+                    String preco2 = valor.getText().toString();
+                    String descricao2=descricao.getText().toString();
 
+                    //nome.setEnabled(false);
+                    //nome.setClickable(false);
+                    //valor.setClickable(false);
+                    //valor.setEnabled(false);
+                    //descricao.setEnabled(false);
+                    //descricao.setClickable(false);
+                    //imgProduto.setClickable(false);
+                    //imgProduto.setEnabled(false);
+                    Cardapio produtoSelecionado = produtos.get(getAdapterPosition());
+                    produtoSelecionado.setDescricao(descricao2);
+                    produtoSelecionado.setNome(nome2);
+                    //produtoSelecionado.setPreco(Double.parseDouble(preco2));
+                   // produtoSelecionado.salvar();
+                    //alterar e salvar
                 }
+
             });
 
         }
+
+
     }
+
+
 }

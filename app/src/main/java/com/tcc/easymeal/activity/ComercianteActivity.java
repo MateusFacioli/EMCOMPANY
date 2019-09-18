@@ -142,51 +142,6 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
     }
 
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_comerciante, menu);
-
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
- int n;
-        switch (item.getItemId()){
-            case R.id.menuCadastrarCardapio:
-                Intent cadastrar = new Intent(ComercianteActivity.this, LojaActivity.class);
-                startActivity(cadastrar);
-                break;
-
-            case R.id.menuOnline:
-                n=1;
-                Msg_alertas("Deseja ficar online para que os clientes possam te encontrar?", n);
-                break;
-
-            case R.id.menuOffiline:
-                 n=2;
-                Msg_alertas("Só é possível ficar indisponível para os clientes depois de entregar todos os pedidos",n);
-                break;
-
-            case R.id.menuPedidos:
-                 n=3;
-                Msg_alertas("Seus pedidos restantes para entregar",n);
-                break;
-
-            case R.id.menuSair:
-                 n=4;
-                Msg_alertas("Deseja sair do sistema ?",n);
-                break;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    */
-
     public void ficaronline(View view)
     {
         Msg_alertas("Deseja ficar online para que os clientes possam te encontrar?",1);
