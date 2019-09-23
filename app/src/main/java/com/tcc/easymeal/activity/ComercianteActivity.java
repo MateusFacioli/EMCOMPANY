@@ -338,11 +338,10 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
     private void inicializarComponentes(){
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
-        String mUser2 = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
         toolbar = findViewById(R.id.toolbarComerciante);
 
-        toolbar.setTitle("Bem Vindo "+ mUser2);
+        toolbar.setTitle("Bem Vindo comerciante "+ mUser.getDisplayName()+" ! ");
 
         setSupportActionBar(toolbar);
         btn_menu=findViewById(R.id.menu_principal);

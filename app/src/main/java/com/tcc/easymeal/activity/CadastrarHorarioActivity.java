@@ -12,7 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tcc.easymeal.R;
+import com.tcc.easymeal.model.Cardapio;
 import com.tcc.easymeal.model.Horario;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import afu.org.checkerframework.checker.units.qual.Time;
 
@@ -23,6 +29,8 @@ public class CadastrarHorarioActivity extends AppCompatActivity {
     private CalendarView calendarView;
     private FloatingActionButton btnAdicionarHorario;
     private Snackbar snackbar;
+    private List<Horario> horarios = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +48,16 @@ public class CadastrarHorarioActivity extends AppCompatActivity {
                 horario1.setTime(txtTime.getText().toString());
                 horario2.setTime(txtTime2.getText().toString());
                 horario1.setDate(calendarView.getDate());
- String h1 =horario1.getTime();
- String h2 =horario2.getTime();
- String dt = horario1.getDate().toString();
-
-             String texto= "Deseja cadastrar este horário"+h1+" - "+h2+"neste dia "+dt+" ?";
+                horario2.setDate(calendarView.getDate());
+                String h1 =horario1.getTime();
+                String h2 =horario2.getTime();
+                Calendar dt = horario1.getDate();
+                //horarios.add(horario1);
+                //horarios.iterator(h1);
+                //horarios.iterator(h2);
+             String texto= "Deseja cadastrar esse horário  "+h1+" até "+h2+" nessa data "+dt+" ? ";
              exibirMensagem(texto);
+
 
 
             }
