@@ -22,6 +22,10 @@
     <string name="open_drawer">Abrir</string>
     <string name="close_drawer">Fechar</string>
     <string name="title_activity_nav_comerciante">NavComercianteActivity</string>
+
+    <string name="googlepay_status_unavailable" translatable="false">Infelizmente, o Google Pay não está disponível neste telefone.</string>
+    <string name="googlepay_status_checking" translatable="false">Verificar se o Google Pay está disponível ...</string>
+    <string name="payments_show_name" translatable="false">Dados de pagamento recebidos com sucesso para% s!</string>
 </resources>
 
 

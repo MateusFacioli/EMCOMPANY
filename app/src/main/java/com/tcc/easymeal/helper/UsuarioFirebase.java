@@ -26,6 +26,8 @@ import com.tcc.easymeal.model.Comerciante;
 
 public class UsuarioFirebase {
 
+    public static Comerciante comerciante;
+
     public static FirebaseUser getUsuarioAtual(){
         FirebaseAuth usuario = ConfiguracaoFirebase.getFirebaseInstance();
         return usuario.getCurrentUser();
@@ -70,6 +72,8 @@ public class UsuarioFirebase {
 
     }
 
+
+
     public static void redirecionaUsuarioLogado(final Activity activity){
 
         FirebaseUser user = getUsuarioAtual();
@@ -82,7 +86,7 @@ public class UsuarioFirebase {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Log.d("resultado", "onDataChange: " + dataSnapshot.toString() );
-                    Comerciante comerciante = dataSnapshot.getValue( Comerciante.class );
+                    comerciante = dataSnapshot.getValue( Comerciante.class );
 
 
                         Intent i = new Intent(activity, ComercianteActivity.class);

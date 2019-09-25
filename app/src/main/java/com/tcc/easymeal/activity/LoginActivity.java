@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
+import com.tcc.easymeal.helper.UsuarioFirebase;
 import com.tcc.easymeal.model.Comerciante;
 
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     //layout
     private TextInputEditText inputLoginUsuario;
     private TextInputEditText inputLoginSenha;
-    private TextInputEditText inputConfirmaSenha;
     private Button btnLogar;
 
 
@@ -51,13 +51,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String senha = inputLoginSenha.getText().toString();
-                String consenha = inputConfirmaSenha.getText().toString();
-                if(senha.equals(consenha)) {
+
                     logarComFirebase(inputLoginUsuario.getText().toString(), inputLoginSenha.getText().toString());
-                }
-                else{
-                    Toast.makeText(LoginActivity.this, "Senhas não coincidem", Toast.LENGTH_LONG).show();
-                }
+
             }
         });
 
@@ -80,9 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if(dataSnapshot.exists()){
-                                        Intent mapa = new Intent(LoginActivity.this, ComercianteActivity.class);
-                                        startActivity(mapa);
-                                        finish();
+                                        UsuarioFirebase.redirecionaUsuarioLogado(LoginActivity.this);
 
                                     }else {
                                         Toast.makeText(LoginActivity.this, "Favor Logar com uma conta valida", Toast.LENGTH_LONG).show();
@@ -104,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w("TagLoginErrado", "Email ou Senha invalidos!", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            
+
 
                         }
 
@@ -116,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
     private void inicializarComponentes(){
         inputLoginUsuario = findViewById(R.id.inputLoginUsuario);
         inputLoginSenha = findViewById(R.id.inputLoginSenha);
-        inputConfirmaSenha = findViewById(R.id.inputConfirmaSenha);
         btnLogar = findViewById(R.id.btnLogar);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = ConfiguracaoFirebase.getFirebase();

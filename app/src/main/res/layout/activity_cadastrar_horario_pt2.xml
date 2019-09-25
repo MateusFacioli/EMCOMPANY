@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CadastrarHorarioPt2Activity">
+
+
+    <TextView
+        android:id="@+id/txtTimeInicio"
+        android:layout_width="239dp"
+        android:layout_height="33dp"
+        android:text="HORARIO DE INICIO"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/timeInicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.354"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22000003"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/txtTimeInicio2"
+        android:layout_width="204dp"
+        android:layout_height="31dp"
+        android:text="HORARIO FINAL"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/timeFinal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeInicio" />
+
+    <TimePicker
+        android:id="@+id/timeInicio"
+        android:layout_width="305dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginLeft="61dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginRight="61dp"
+        android:layout_marginBottom="32dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toTopOf="@+id/txtTimeInicio2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTimeInicio" />
+
+    <TimePicker
+        android:id="@+id/timeFinal"
+        android:layout_width="291dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginLeft="61dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginRight="61dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTimeInicio2" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnFloatNextHorario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
+        app:srcCompat="@drawable/right_arrow" />
+
+</android.support.constraint.ConstraintLayout>
