@@ -21,7 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
-import com.tcc.easymeal.helper.UsuarioFirebase;
 import com.tcc.easymeal.model.Comerciante;
 
 import java.util.ArrayList;
@@ -33,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText inputLoginUsuario;
     private TextInputEditText inputLoginSenha;
     private Button btnLogar;
+    private Button esqueci_senha;
 
 
     //firebase
@@ -46,17 +46,22 @@ public class LoginActivity extends AppCompatActivity {
 //        getSupportActionBar().hide();
         inicializarComponentes();
 
-
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String senha = inputLoginSenha.getText().toString();
 
-                    logarComFirebase(inputLoginUsuario.getText().toString(), inputLoginSenha.getText().toString());
-
+                logarComFirebase(inputLoginUsuario.getText().toString(), inputLoginSenha.getText().toString());
             }
         });
 
+        esqueci_senha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reset = new Intent(LoginActivity.this, ResetActivity.class);
+                startActivity(reset);
+            }
+        });
 
     }
 
@@ -76,7 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if(dataSnapshot.exists()){
-                                        UsuarioFirebase.redirecionaUsuarioLogado(LoginActivity.this);
+                                        Intent mapa = new Intent(LoginActivity.this, ComercianteActivity.class);
+                                        startActivity(mapa);
+                                        finish();
 
                                     }else {
                                         Toast.makeText(LoginActivity.this, "Favor Logar com uma conta valida", Toast.LENGTH_LONG).show();
@@ -111,6 +118,8 @@ public class LoginActivity extends AppCompatActivity {
         inputLoginUsuario = findViewById(R.id.inputLoginUsuario);
         inputLoginSenha = findViewById(R.id.inputLoginSenha);
         btnLogar = findViewById(R.id.btnLogar);
+        esqueci_senha = findViewById(R.id.reset_senha);
+
         mAuth = FirebaseAuth.getInstance();
         mDatabase = ConfiguracaoFirebase.getFirebase();
 
