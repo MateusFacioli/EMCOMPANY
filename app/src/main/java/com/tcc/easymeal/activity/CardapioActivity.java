@@ -190,7 +190,7 @@ public class CardapioActivity extends AppCompatActivity {
                 if (!preco.isEmpty()) {
                     if(precoD > 0) {
 
-
+//git
                         cardapio.setNome(nome);
                         cardapio.setDescricao(descricao);
                         cardapio.setPreco(Double.parseDouble(preco));
