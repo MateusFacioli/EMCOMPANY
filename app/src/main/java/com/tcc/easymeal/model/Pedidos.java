@@ -13,9 +13,18 @@ public class Pedidos {
     private Loja produto;
     private String idpedido;
     private String status;
+    private String urlImg;
 
 
     public Pedidos() {
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
     }
 
     public Comerciante getComerciante() {

@@ -37,12 +37,15 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.model.Cardapio;
 import com.tcc.easymeal.model.Comerciante;
 import com.tcc.easymeal.model.Localizacao;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class ComercianteActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
@@ -335,13 +338,14 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         alerta.show();
     }
 
+
+
     private void inicializarComponentes(){
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
         toolbar = findViewById(R.id.toolbarComerciante);
-
-        toolbar.setTitle("Bem Vindo comerciante "+ mUser.getDisplayName()+" ! ");
+        toolbar.setTitle("Bem Vindo comerciante " + mUser.getDisplayName()+" ! ");
 
         setSupportActionBar(toolbar);
         btn_menu=findViewById(R.id.menu_principal);

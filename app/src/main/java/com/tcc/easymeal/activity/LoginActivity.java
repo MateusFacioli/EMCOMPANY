@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         esqueci_senha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +64,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
+
 
     private void logarComFirebase(String email, String senha){
         mAuth.signInWithEmailAndPassword(email, senha)

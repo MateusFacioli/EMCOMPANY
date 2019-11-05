@@ -63,7 +63,7 @@ public class PedidosActivity extends AppCompatActivity {
                     userIdList.add( ds.getKey());
                 }
                    //recuperarProdutos();
-                    recuperarProdutos(userIdList);
+                    recuperarPedidos(userIdList);
 
 
             }
@@ -75,23 +75,21 @@ public class PedidosActivity extends AppCompatActivity {
         });
     }
 
-    private void recuperarProdutos(List<String> userIdList) {
+    private void recuperarPedidos(List<String> userIdList) {
 
-        String idComerciante = UsuarioFirebase.getDadosUsuarioLogado().getUid();
-        for (int i = 0; i < userIdList.size(); i++) {
-        String id = userIdList.get(i);
+         DatabaseReference databaseReference=firebaseRef.child("comerciante")
+                 .child(UsuarioFirebase.getIdentificadorUsuario())
+                 .child("pedidos");
 
-        DatabaseReference produtosRef = firebaseRef
-                .child("pedido")
-                .child(id);
+        // Query qDatabaseReference = databaseReference.orderByChild("pedidos");
 
-            produtosRef.addValueEventListener(new ValueEventListener() {
+            databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     pedidos.clear();
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        if(ds.getValue(Pedidos.class).getComerciante().getUid().equals(idComerciante))
+                        //if(ds.getValue(Pedidos.class).getComerciante().getUid().equals(idComerciante))
 
                         pedidos.add(ds.getValue(Pedidos.class));
                     }
@@ -107,7 +105,7 @@ public class PedidosActivity extends AppCompatActivity {
             });
 
         }
-    }
+
 
     private void configurarComponentes(){
         recyclerProdutos.setLayoutManager(new LinearLayoutManager(this));

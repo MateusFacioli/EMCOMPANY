@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.tcc.easymeal"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -70,8 +70,7 @@ dependencies {
     //google pay
     implementation 'org.apiguardian:apiguardian-api:1.1.0'
     implementation 'com.google.android.gms:play-services-wallet:16.0.0'
-
-
+    implementation 'com.google.firebase:firebase-crash:16.2.1'
 
 
 }
