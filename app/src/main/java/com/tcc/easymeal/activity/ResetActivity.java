@@ -1,5 +1,4 @@
 package com.tcc.easymeal.activity;
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +9,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.tcc.easymeal.R;
@@ -45,6 +45,7 @@ public class ResetActivity extends AppCompatActivity {
     public void reset( View view ){
         firebaseAuth
                 .sendPasswordResetEmail( email.getText().toString() )
+
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -72,4 +73,5 @@ public class ResetActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }

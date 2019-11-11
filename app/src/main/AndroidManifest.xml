@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.CadastrarHorarioPt2Activity"></activity>
         <activity android:name=".activity.PedidosActivity" />
+        <activity android:name=".activity.ResetActivity" />
         <activity android:name=".activity.LojaActivity" />
         <activity
             android:name=".activity.CardapioActivity"

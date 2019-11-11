@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.tcc.easymeal.model.Comerciante;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.model.ValidaCPF;
@@ -127,6 +129,7 @@ public class CadastrarActivity extends AppCompatActivity {
                                 comerciante.setEmail(email);
                                 comerciante.setTelefone(telefone);
                                 comerciante.setSenha(senha);
+                                //this.LerNomeUser(comerciante.getNome());
 
 
                                 criaUsuarioFirebase(email, senha);
@@ -170,6 +173,28 @@ public class CadastrarActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 comerciante.setUid(user.getUid());
                                 comerciante.salvar();
+
+
+
+                                // fazendo o getdisplayname funcionar
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(comerciante.getNome()).build();
+                                 user.updateProfile(profileUpdates);
+                                Object mAuthListener;
+
+                                mAuthListener = new FirebaseAuth.AuthStateListener(){
+                                    @Override
+                                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                                        if (user != null) {
+                                            comerciante.setNome(user.getDisplayName());
+                                        } else {
+                                            comerciante.setNome(user.getDisplayName());
+                                        }
+                                    }
+                                };
+                                //fim funcao getdisplayname
+
                                 Intent inicio = new Intent(CadastrarActivity.this, ComercianteActivity.class);
                                 startActivity(inicio);
                                 finish();
@@ -205,7 +230,6 @@ public class CadastrarActivity extends AppCompatActivity {
     }
 
 
-
     private void inicializarComponenetes(){
         inputNome = findViewById(R.id.input_Descri);
         inputCPF = findViewById(R.id.inputCPF);
@@ -215,6 +239,7 @@ public class CadastrarActivity extends AppCompatActivity {
         confirmar_senha=findViewById(R.id.inputConfirmaSenha);
         btnFloatNext = findViewById(R.id.btnFloatNext);
         mAuth = FirebaseAuth.getInstance();
+
     }
 }
 

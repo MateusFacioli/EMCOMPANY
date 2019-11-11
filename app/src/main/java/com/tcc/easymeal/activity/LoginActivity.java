@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         esqueci_senha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +64,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
+
 
     private void logarComFirebase(String email, String senha){
         mAuth.signInWithEmailAndPassword(email, senha)
@@ -103,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TagLoginErrado", "Email ou Senha invalidos!", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Erro! E-mail ou senha invalidos ",
                                     Toast.LENGTH_SHORT).show();
 
 

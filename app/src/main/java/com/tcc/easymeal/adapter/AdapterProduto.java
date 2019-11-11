@@ -1,6 +1,7 @@
 package com.tcc.easymeal.adapter;
 
 
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
 import com.tcc.easymeal.R;
+import com.tcc.easymeal.activity.LoginActivity;
 import com.tcc.easymeal.model.Cardapio;
 
 import java.util.List;
@@ -81,7 +85,7 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
                         public void onClick(View v) {
                             Cardapio produtoSelecionado = produtos.get(getAdapterPosition());
                             produtoSelecionado.remover();
-                            //confirmar a exclusao
+                            Toast.makeText(delete.getContext(),"Produto excluído com sucesso",Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -90,41 +94,71 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
 
             });
 
+
             edit.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
+                    Snackbar snackbar;
+                    snackbar = Snackbar.make(v, "Quer realmente alterar esse produto?", Snackbar.LENGTH_INDEFINITE);
+                    snackbar.show();
+                    snackbar.setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Cardapio produtoSelecionado = produtos.get(getAdapterPosition());
 
-                    nome.setEnabled(true);
-                    nome.setClickable(true);
-                    valor.setClickable(true);
-                    valor.setEnabled(true);
-                    descricao.setEnabled(true);
-                    descricao.setClickable(true);
-                    imgProduto.setClickable(true);
-                    imgProduto.setEnabled(true);
-                    String nome2=nome.getText().toString();
-                    String preco2 = valor.getText().toString();
-                    String descricao2=descricao.getText().toString();
+                            nome.setEnabled(true);
+                            nome.setClickable(true);
+                            valor.setClickable(true);
+                            valor.setEnabled(true);
+                            descricao.setEnabled(true);
+                            descricao.setClickable(true);
+                            imgProduto.setClickable(true);
+                            imgProduto.setEnabled(true);
 
-                    //nome.setEnabled(false);
-                    //nome.setClickable(false);
-                    //valor.setClickable(false);
-                    //valor.setEnabled(false);
-                    //descricao.setEnabled(false);
-                    //descricao.setClickable(false);
-                    //imgProduto.setClickable(false);
-                    //imgProduto.setEnabled(false);
-                    Cardapio produtoSelecionado = produtos.get(getAdapterPosition());
-                    produtoSelecionado.setDescricao(descricao2);
-                    produtoSelecionado.setNome(nome2);
-                    //produtoSelecionado.setPreco(Double.parseDouble(preco2));
-                   // produtoSelecionado.salvar();
-                    //alterar e salvar
+// nao cai no if mudar o metodo
+                            if(nome.isInEditMode()==true&& valor.isInEditMode()==true&& descricao.isInEditMode()==true
+                             && imgProduto.isInEditMode()==true)
+                            {
+
+                                String nome2 = nome.getText().toString();
+                                String preco2 = valor.getText().toString();
+                                String descricao2 = descricao.getText().toString();
+
+                                produtoSelecionado.setDescricao(descricao2);
+                                produtoSelecionado.setNome(nome2);
+                                //produtoSelecionado.setPreco(Double.parseDouble(preco2));
+
+                            }else{
+
+                                nome.setClickable(false);
+                                nome.setEnabled(false);
+                                valor.setEnabled(false);
+                                valor.setClickable(false);
+                                imgProduto.setEnabled(false);
+                                imgProduto.setClickable(false);
+                                descricao.setClickable(false);
+                                descricao.setEnabled(false);
+                                produtoSelecionado.salvar();
+
+
+                            }
+                            Toast.makeText(edit.getContext(),"Produto alterado com sucesso",Toast.LENGTH_LONG).show();
+
+                        }
+
+
+                    });
+
+
+                        }
+
+                    }
+                    );
+
                 }
 
-            });
 
-        }
 
 
     }
