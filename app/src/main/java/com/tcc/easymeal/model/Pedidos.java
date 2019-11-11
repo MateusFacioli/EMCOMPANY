@@ -14,9 +14,18 @@ public class Pedidos {
     private String idpedido;
     private String status;
     private String urlImg;
+    private String dataX;
 
 
     public Pedidos() {
+    }
+
+    public String getDataX() {
+        return dataX;
+    }
+
+    public void setDataX(String dataX) {
+        this.dataX = dataX;
     }
 
     public String getUrlImg() {

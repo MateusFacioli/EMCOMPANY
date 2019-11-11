@@ -1,10 +1,14 @@
 package com.tcc.easymeal.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -16,6 +20,7 @@ import com.tcc.easymeal.R;
 import com.tcc.easymeal.adapter.AdapterPedidos;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.helper.UsuarioFirebase;
+import com.tcc.easymeal.listener.RecyclerItemClickListener;
 import com.tcc.easymeal.model.Cardapio;
 import com.tcc.easymeal.model.Pedidos;
 
@@ -42,6 +47,36 @@ public class PedidosActivity extends AppCompatActivity {
         inicializarComponentes();
         configurarComponentes();
         recuperarID();
+
+        recyclerProdutos.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        this,
+                        recyclerProdutos,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Intent visualizar = new Intent(PedidosActivity.this, VisualizarPedidoActivity.class);
+                                Pedidos pedido = new Pedidos();
+                                pedido =  pedidos.get(position);
+                                String idpedido = pedido.getIdpedido();
+                               // Toast.makeText(PedidosActivity.this, pedido.getIdpedido(), Toast.LENGTH_SHORT).show();
+
+                                visualizar.putExtra("idPedido",idpedido);
+                                startActivity(visualizar);
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                )
+        );
 
 
     }
