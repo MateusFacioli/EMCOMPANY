@@ -157,5 +157,6 @@ public class PedidosActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarPedidos);
         toolbar.setTitle("Pedidos");
         setSupportActionBar(toolbar);
+        Toast.makeText(PedidosActivity.this, "Clique no pedido para obter mais informações", Toast.LENGTH_LONG).show();
     }
 }

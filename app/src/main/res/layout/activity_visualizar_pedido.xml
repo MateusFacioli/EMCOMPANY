@@ -8,24 +8,26 @@
 
     <ImageView
         android:id="@+id/imgVisualizarPedidos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="114dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/txtDadaDoPedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:text="DATA DO PEDIDO"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.011"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/imgVisualizarPedidos"
         app:layout_constraintVertical_bias="1.0" />
@@ -71,7 +73,7 @@
         android:id="@+id/txtItemPedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ITEM DO PEDIDO"
+        android:text="INFORMAÇÕES DO PEDIDO"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="@+id/view3"
@@ -81,29 +83,43 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
+        android:id="@+id/label1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="44dp"
+        android:text="NOME PRODUTO: "
+        app:layout_constraintBottom_toTopOf="@+id/label2"
+        app:layout_constraintEnd_toStartOf="@+id/txtItemDoPedido"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toBottomOf="@+id/txtItemPedido"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/label3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
+        android:text="VALOR: "
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintEnd_toStartOf="@+id/txtValor"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toStartOf="@+id/view3" />
+
+    <TextView
         android:id="@+id/txtItemDoPedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ITEM DO PEDIDO"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintBottom_toBottomOf="@+id/label1"
         app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintHorizontal_bias="0.681"
         app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3"
-        app:layout_constraintVertical_bias="0.227" />
-
-    <TextView
-        android:id="@+id/txtQuantidadePedido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="QUANTIDADE"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
-        app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintHorizontal_bias="0.096"
-        app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3" />
+        app:layout_constraintTop_toTopOf="@+id/label1"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/txtValor"
@@ -111,12 +127,36 @@
         android:layout_height="wrap_content"
         android:text="VALOR"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintBottom_toBottomOf="@+id/label3"
         app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3"
-        app:layout_constraintVertical_bias="0.759" />
+        app:layout_constraintTop_toTopOf="@+id/label3"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txtQuantidadePedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QUANTIDADE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/label2"
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintHorizontal_bias="0.603"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/label2"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="QUANTIDADE: "
+        app:layout_constraintBottom_toTopOf="@+id/label3"
+        app:layout_constraintEnd_toStartOf="@+id/txtQuantidadePedido"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="@+id/view3" />
 
     <View
         android:id="@+id/view2"
@@ -135,6 +175,7 @@
         android:background="#17646161"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
@@ -145,6 +186,7 @@
         android:background="#17646161"
         app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgVisualizarPedidos" />
 
