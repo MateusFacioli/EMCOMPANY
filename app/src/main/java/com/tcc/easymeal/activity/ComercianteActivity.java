@@ -41,6 +41,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
+import com.tcc.easymeal.helper.UsuarioFirebase;
 import com.tcc.easymeal.model.Cardapio;
 import com.tcc.easymeal.model.Comerciante;
 import com.tcc.easymeal.model.Localizacao;
@@ -235,6 +236,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
                                 localizacao.setLatitude(latLng.latitude);
                                 localizacao.setLongitude(latLng.longitude);
+                                UsuarioFirebase.atualizarDadosLocalizacao(localizacao.getLatitude(), localizacao.getLongitude());
 
                             }
                         }

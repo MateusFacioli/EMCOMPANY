@@ -121,7 +121,7 @@ public class PedidosActivity extends AppCompatActivity {
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    pedidos.clear();
+                    //pedidos.clear();
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         //if(ds.getValue(Pedidos.class).getComerciante().getUid().equals(idComerciante))

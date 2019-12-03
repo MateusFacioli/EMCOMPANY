@@ -42,6 +42,15 @@ public class Localizacao {
                 .child("localizacao");
 
         reference.removeValue();
+
+        DatabaseReference database2 = ConfiguracaoFirebase.getFirebaseDatabase();
+        DatabaseReference reference2 = database2
+                .child("local_comerciante")
+                .child(UsuarioFirebase
+                        .getDadosUsuarioLogado()
+                        .getUid());
+
+        reference2.removeValue();
     }
 
     public Double getLatitude() {
