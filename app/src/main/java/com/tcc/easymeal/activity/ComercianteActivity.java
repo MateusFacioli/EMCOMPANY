@@ -156,7 +156,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
     public void vaiscan(View view)
     {
-        Msg_alertas("Deseja escanear um qrcode?",6);
+        Msg_alertas("Deseja escanear um QR-Code?",6);
     }
 
     public void vaiagenda(View view)
