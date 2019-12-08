@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -38,10 +39,15 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.helper.UsuarioFirebase;
+import com.tcc.easymeal.model.Avaliacao;
 import com.tcc.easymeal.model.Cardapio;
 import com.tcc.easymeal.model.Comerciante;
 import com.tcc.easymeal.model.Localizacao;
@@ -69,6 +75,9 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
     private AnimatorSet mCloseAnimatorSet;
     private FloatingActionMenu btn_menu;
 
+    private DatabaseReference mDatabase;
+    private Avaliacao avaliacao = new Avaliacao();
+
     private Toolbar toolbar;
 
 
@@ -79,7 +88,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         setContentView(R.layout.activity_comerciante);
 
         inicializarComponentes();
-
+        recuperarAvaliacao();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -90,6 +99,32 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                     .addApi(LocationServices.API)
                     .build();
         }
+
+    }
+
+    private void recuperarAvaliacao(){
+
+        Query avaliacaoRef = mDatabase
+                .child("comerciante")
+                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid())
+                .child("avaliacao");
+
+        avaliacaoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    avaliacao = dataSnapshot.getValue(Avaliacao.class);
+                Toast.makeText(ComercianteActivity.this, avaliacao.getAvaliacao().toString(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
 
     }
 
@@ -220,8 +255,6 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-
-
                         if (ActivityCompat.checkSelfPermission(ComercianteActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ComercianteActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
                                 != PackageManager.PERMISSION_GRANTED)
@@ -283,7 +316,7 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        localizacao.remover();
+                       // localizacao.remover();
                         FirebaseAuth.getInstance().signOut();
                         finish();
                     }
@@ -352,6 +385,8 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
         toolbar = findViewById(R.id.toolbarComerciante);
 
         toolbar.setTitle("Bem Vindo comerciante "+ mUser.getDisplayName()+" ! ");
+
+        mDatabase = ConfiguracaoFirebase.getFirebase();
 
         setSupportActionBar(toolbar);
         btn_menu=findViewById(R.id.menu_principal);

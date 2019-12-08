@@ -8,8 +8,10 @@ public class Loja {
     private String imgUrl;
     private String idProduto;
 
+
     public Loja() {
     }
+
 
 
     public String getIdProduto() {

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "605243143793-ftg9c0cfmqcb75ptnaih2cq4mbgp4hst.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.izi.tcccliente",
+            "certificate_hash": "aadee82c866750238a102dc2620aadbc7178ea02"
+          }
+        },
+        {
           "client_id": "605243143793-e1n6juprmtrvf7q9et2ubem11alh2qou.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

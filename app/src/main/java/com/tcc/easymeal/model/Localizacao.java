@@ -33,7 +33,7 @@ public class Localizacao {
     }
 
     public void remover(){
-        DatabaseReference database = ConfiguracaoFirebase.getFirebaseDatabase();
+       /* DatabaseReference database = ConfiguracaoFirebase.getFirebaseDatabase();
         DatabaseReference reference = database
                 .child("comerciante")
                 .child(UsuarioFirebase
@@ -41,7 +41,7 @@ public class Localizacao {
                         .getUid())
                 .child("localizacao");
 
-        reference.removeValue();
+        reference.removeValue();*/
 
         DatabaseReference database2 = ConfiguracaoFirebase.getFirebaseDatabase();
         DatabaseReference reference2 = database2
