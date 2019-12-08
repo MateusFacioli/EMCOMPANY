@@ -33,13 +33,13 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:onClick="reset"
-            android:gravity="center"
-            android:text="Reset"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:onClick="reset"
+            android:text="Alterar a senha" />
     </RelativeLayout>
 </ScrollView>

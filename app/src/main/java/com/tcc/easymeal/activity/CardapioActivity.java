@@ -74,7 +74,13 @@ public class CardapioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                validarDadosProduto(v);
+                try {
+                    validarDadosProduto(v);
+                }
+                 catch (Exception e)
+                 {
+                     exibirMensagem("Insira todos os dados do produto");
+                 }
             }
         });
 
