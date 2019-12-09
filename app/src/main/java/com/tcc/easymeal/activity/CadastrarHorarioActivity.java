@@ -36,8 +36,17 @@ public class CadastrarHorarioActivity extends AppCompatActivity {
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                date = (dayOfMonth + "/"+ month + "/" + year);
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth)
+            {
+                if(year !=0 && month !=0 && dayOfMonth!=0)
+                {
+                    date = (dayOfMonth + "/"+ month + "/" + year);
+                }
+                else
+                {
+                    exibirMensagem("Erro, por favor selecione uma data válida");
+                }
+
 
             }
         });

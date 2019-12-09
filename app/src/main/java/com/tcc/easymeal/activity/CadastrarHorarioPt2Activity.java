@@ -36,6 +36,11 @@ public class CadastrarHorarioPt2Activity extends AppCompatActivity {
 
                     horario.setTimeInicio(hourOfDay + ":" + minute);
                 }
+                else
+                {
+                    Toast.makeText( CadastrarHorarioPt2Activity.this,"Horário inicial inválido", Toast.LENGTH_SHORT)
+                            .show();
+                }
 
 
 
@@ -48,6 +53,12 @@ public class CadastrarHorarioPt2Activity extends AppCompatActivity {
                 if(hourOfDay != 0 && minute != 0){
                     horario.setTimeFinal(hourOfDay + ":" + minute);
                 }
+                else
+                {
+                    Toast.makeText( CadastrarHorarioPt2Activity.this,"Horário final inválido", Toast.LENGTH_SHORT)
+                            .show();
+                }
+
 
 
 

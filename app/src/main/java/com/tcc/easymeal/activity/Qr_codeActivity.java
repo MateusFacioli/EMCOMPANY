@@ -24,8 +24,8 @@ import com.tcc.easymeal.R;
 
 
 public class Qr_codeActivity extends AppCompatActivity {
-   private Button scan;
-   private ImageView qr_code;
+    private Button scan;
+    private ImageView qr_code;
     private Snackbar snackbar;
 
     @Override
@@ -50,8 +50,7 @@ public class Qr_codeActivity extends AppCompatActivity {
                 integrator.setCameraId(0);//camera traseira
                 integrator.initiateScan();
 
-                snackbar =Snackbar.make(v,"Código lido com sucesso",Snackbar.LENGTH_INDEFINITE);
-                snackbar.show();
+
             }
         });
 
@@ -64,30 +63,32 @@ public class Qr_codeActivity extends AppCompatActivity {
         if(result!=null)
         {
             if(result.getContents()!=null)
-           {
-               snackbar.setAction("OK", new View.OnClickListener() {
-                @Override
-                public void onClick(View v)
-                {
-                    Log.d("meuLog","Lido com sucesso");
-                }
-            });
-        } else
             {
                 snackbar.setAction("OK", new View.OnClickListener() {
                     @Override
                     public void onClick(View v)
                     {
-                        Log.d("meuLog","tudoErrado");
+                        snackbar =Snackbar.make(v,"Código lido com sucesso",Snackbar.LENGTH_INDEFINITE);
+                        snackbar.show();
+                    }
+                });
+            } else
+            {
+                snackbar.setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        snackbar =Snackbar.make(v,"Leitura de QR-Code falhou, tente novamente",Snackbar.LENGTH_INDEFINITE);
+                        snackbar.show();
                     }
                 });
             }
 
         }
         else
-             {
-              super.onActivityResult(requestCode, resultCode, data);
-             }
+        {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 
