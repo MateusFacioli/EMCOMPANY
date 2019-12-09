@@ -363,12 +363,12 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Intent agenda= new Intent(ComercianteActivity.this, CadastrarHorarioActivity.class);
-                       // startActivity(agenda);
-                        Intent cadastrar = new Intent(ComercianteActivity.this, PedidosActivity.class);
-                        String tipo = "reservado";
-                        cadastrar.putExtra("tipo", tipo);
-                        startActivity(cadastrar);
+                        Intent agenda= new Intent(ComercianteActivity.this, CadastrarHorarioActivity.class);
+                        startActivity(agenda);
+                        //Intent cadastrar = new Intent(ComercianteActivity.this, PedidosActivity.class);
+                        //String tipo = "reservado";
+                        //cadastrar.putExtra("tipo", tipo);
+                        //startActivity(cadastrar);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
