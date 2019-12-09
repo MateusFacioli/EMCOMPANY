@@ -150,9 +150,7 @@ public class PedidosActivity extends AppCompatActivity {
         recyclerProdutos.setHasFixedSize(true);
         adapterPedidos = new AdapterPedidos(pedidos);
         recyclerProdutos.setAdapter( adapterPedidos );
-        if(bPedidos != null){
-            tipo = bPedidos.get("tipo").toString();
-        }
+
     }
 
     private void inicializarComponentes(){
