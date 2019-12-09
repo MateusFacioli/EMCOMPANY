@@ -164,6 +164,10 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
 
     }
 
+    public void reservados(View view){
+        Msg_alertas("Deseja ver os pedidos reservados?", 1);
+    }
+
     public void ficaronline(View view)
     {
         Msg_alertas("Deseja ficar online para que os clientes possam te encontrar?",1);
@@ -359,8 +363,26 @@ public class ComercianteActivity extends AppCompatActivity implements OnMapReady
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent agenda= new Intent(ComercianteActivity.this, CadastrarHorarioActivity.class);
-                        startActivity(agenda);
+                        //Intent agenda= new Intent(ComercianteActivity.this, CadastrarHorarioActivity.class);
+                       // startActivity(agenda);
+                        Intent cadastrar = new Intent(ComercianteActivity.this, PedidosActivity.class);
+                        String tipo = "reservado";
+                        cadastrar.putExtra("tipo", tipo);
+                        startActivity(cadastrar);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+                break;
+            case 8://reservado
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

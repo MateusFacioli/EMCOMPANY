@@ -44,6 +44,27 @@
         app:menu_labels_cornerRadius="8dp">
 
         <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/add_reservados"
+            style="@style/MenuButtonsStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="reservados"
+            android:src="@drawable/exit"
+            android:visibility="visible"
+            app:fab_label="Reservados">
+
+        </com.github.clans.fab.FloatingActionButton>
+
+        <com.github.clans.fab.FloatingActionButton
             android:id="@+id/add_produto"
             style="@style/MenuButtonsStyle"
             android:layout_width="wrap_content"

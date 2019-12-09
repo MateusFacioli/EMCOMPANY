@@ -33,11 +33,14 @@ public class PedidosActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private RecyclerView recyclerProdutos;
     private AdapterPedidos adapterPedidos;
+    private Intent iPedidos;
+    private Bundle bPedidos;
 
     private List<Pedidos> pedidos = new ArrayList<>();
     private DatabaseReference firebaseRef;
     private String idUsuarioLogado;
 
+    private String tipo;
     private Toolbar toolbar;
 
     @Override
@@ -60,8 +63,8 @@ public class PedidosActivity extends AppCompatActivity {
                                 pedido =  pedidos.get(position);
                                 String idpedido = pedido.getIdpedido();
                                // Toast.makeText(PedidosActivity.this, pedido.getIdpedido(), Toast.LENGTH_SHORT).show();
-
                                 visualizar.putExtra("idPedido",idpedido);
+                                visualizar.putExtra("tipo", tipo);
                                 startActivity(visualizar);
                             }
 
@@ -147,9 +150,14 @@ public class PedidosActivity extends AppCompatActivity {
         recyclerProdutos.setHasFixedSize(true);
         adapterPedidos = new AdapterPedidos(pedidos);
         recyclerProdutos.setAdapter( adapterPedidos );
+        if(bPedidos != null){
+            tipo = bPedidos.get("tipo").toString();
+        }
     }
 
     private void inicializarComponentes(){
+        iPedidos = getIntent();
+        bPedidos = iPedidos.getExtras();
         recyclerProdutos = findViewById(R.id.recyclerPedidos);
         autenticacao = ConfiguracaoFirebase.getFirebaseInstance();
         firebaseRef = ConfiguracaoFirebase.getFirebase();
