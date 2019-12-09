@@ -62,8 +62,8 @@ public class CadastrarHorarioPt2Activity extends AppCompatActivity {
                         + "/" + horario.getTimeFinal(), Toast.LENGTH_SHORT).show();
 
                 horario.salvar();
-                Intent intent = new Intent(getApplicationContext(), ComercianteActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent intent = new Intent(getApplicationContext(), Locais.class);
+               // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //Intent mapa = new Intent(CadastrarHorarioPt2Activity.this, )
 

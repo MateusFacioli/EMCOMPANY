@@ -4,7 +4,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.tcc.easymeal.config.ConfiguracaoFirebase;
 import com.tcc.easymeal.helper.UsuarioFirebase;
 
-public class Cardapio {
+import java.io.Serializable;
+
+public class Cardapio implements Serializable {
 
     private String nome;
     private Double preco;
@@ -15,13 +17,12 @@ public class Cardapio {
 
 
 
-
     public Cardapio() {
-        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
-        DatabaseReference produtoRef = firebaseRef
-                .child("produtos");
-        setIdProduto( produtoRef.push().getKey() );
+
     }
+
+
+
 
     public void salvar(){
         DatabaseReference database = ConfiguracaoFirebase.getFirebaseDatabase();

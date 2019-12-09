@@ -32,8 +32,9 @@ import java.io.ByteArrayOutputStream;
 
 public class CardapioActivity extends AppCompatActivity {
 
-    private EditText editNomeProduto,editDescricao,
-            editPreco;
+    private EditText editNomeProduto;
+    private EditText editDescricao;
+    private EditText  editPreco;
 
     private ImageView imageProduto;
     private FirebaseAuth autenticacao;
@@ -197,6 +198,11 @@ public class CardapioActivity extends AppCompatActivity {
                     if(precoD > 0) {
 
 //git
+                        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
+                        DatabaseReference produtoRef = firebaseRef
+                                .child("produtos");
+                        cardapio.setIdProduto( produtoRef.push().getKey() );
+
                         cardapio.setNome(nome);
                         cardapio.setDescricao(descricao);
                         cardapio.setPreco(Double.parseDouble(preco));

@@ -31,7 +31,9 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import com.tcc.easymeal.R;
+import com.tcc.easymeal.helper.UsuarioFirebase;
 import com.tcc.easymeal.model.Comerciante;
+import com.tcc.easymeal.model.Localizacao;
 
 import java.util.Arrays;
 
@@ -81,8 +83,13 @@ public class Locais extends FragmentActivity implements OnMapReadyCallback, Goog
             @Override
             public void onClick(View v) {
                 if(endenreco != null) {
+                    Localizacao localizacao = new Localizacao();
+                    localizacao.setLatitude(mLastLocation.getLatitude());
+                    localizacao.setLongitude(mLastLocation.getLongitude());
                     Intent checkout = new Intent(Locais.this, ComercianteActivity.class);
                     startActivity(checkout);
+                    UsuarioFirebase.atualizarDadosLocalizacao(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                    localizacao.salvar();
                     finish();
                 }
             }
@@ -102,6 +109,16 @@ public class Locais extends FragmentActivity implements OnMapReadyCallback, Goog
             @Override
             public void onPlaceSelected(Place place) {
                 endenreco = place.getAddress();
+                mLastLocation.setLatitude(place.getLatLng().latitude);
+                mLastLocation.setLongitude(place.getLatLng().longitude);
+
+
+                meuLocal = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+                // Adicionamos um Marker com a posição...
+                mMap.addMarker(new MarkerOptions().position(meuLocal).title("Minha Posição"));
+                // Um zoom no mapa para a seua posição atual...
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(meuLocal, 18));
 
         /*// TODO: Get info about the selected place.
         Log.i("PlaceCerto", "Place: " + place.getName() + ", " + place.getId());
@@ -148,12 +165,9 @@ public class Locais extends FragmentActivity implements OnMapReadyCallback, Goog
         if (mLastLocation != null) {
             if(mMap != null){
                 // Criamos o LatLng através do Location
-                meuLocal = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-                // Adicionamos um Marker com a posição...
-                mMap.addMarker(new MarkerOptions().position(meuLocal).title("Minha Posição"));
-                // Um zoom no mapa para a seua posição atual...
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(meuLocal, 18));
+
+
 
             }
 

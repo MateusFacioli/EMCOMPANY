@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.tcc.easymeal.model.Avaliacao;
 import com.tcc.easymeal.model.Comerciante;
 import com.tcc.easymeal.R;
 import com.tcc.easymeal.model.ValidaCPF;
@@ -123,12 +124,16 @@ public class CadastrarActivity extends AppCompatActivity {
                     if(!telefone.isEmpty()){
                         if(!senha.isEmpty()){
                             if(ValidaCPF.isCPF(cpf)) {
+                                Avaliacao avaliacao = new Avaliacao();
+                                avaliacao.setAvaliacao((double) 5);
+                                avaliacao.setComentario("");
 
                                 comerciante.setNome(nome);
                                 comerciante.setCpf(cpf);
                                 comerciante.setEmail(email);
                                 comerciante.setTelefone(telefone);
                                 comerciante.setSenha(senha);
+                                comerciante.setAvaliacao(avaliacao);
                                 //this.LerNomeUser(comerciante.getNome());
 
 

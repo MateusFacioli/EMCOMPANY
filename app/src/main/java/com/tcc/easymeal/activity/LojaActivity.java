@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -206,9 +207,11 @@ public class LojaActivity extends AppCompatActivity {
     }
     private void configurarComponentes()
     {
+        Context context;
+        context = getApplicationContext();
         recyclerProdutos.setLayoutManager(new LinearLayoutManager(this));
         recyclerProdutos.setHasFixedSize(true);
-        adapterProduto = new AdapterProduto(produtos);
+        adapterProduto = new AdapterProduto(produtos,context);
         recyclerProdutos.setAdapter( adapterProduto );
     }
 

@@ -13,6 +13,7 @@ public class Comerciante implements Serializable {
     private String email;
     private String telefone;
     private String senha;
+    private Avaliacao avaliacao;
 
 
 
@@ -26,6 +27,13 @@ public class Comerciante implements Serializable {
         reference.setValue(this);
     }
 
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
+    }
 
     public String getUid() {
         return uid;

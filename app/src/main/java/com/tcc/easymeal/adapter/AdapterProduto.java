@@ -1,7 +1,10 @@
 package com.tcc.easymeal.adapter;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -15,18 +18,22 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.tcc.easymeal.R;
+import com.tcc.easymeal.activity.EditarActivity;
 import com.tcc.easymeal.activity.LoginActivity;
 import com.tcc.easymeal.model.Cardapio;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHolder>{
 
     private List<Cardapio> produtos;
+    private Context context;
 
 
-    public AdapterProduto(List<Cardapio> produtos) {
+    public AdapterProduto(List<Cardapio> produtos, Context context ) {
         this.produtos = produtos;
+        this.context = context;
 
     }
 
@@ -106,17 +113,17 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
                         @Override
                         public void onClick(View v) {
                             Cardapio produtoSelecionado = produtos.get(getAdapterPosition());
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("produtos", (Serializable) produtos);
+                            Intent intent = new Intent(context, EditarActivity.class);
+                            intent.putExtras(bundle);
+                            intent.putExtra("nome",nome.getText().toString());
+                            context.startActivity(intent);
 
-                            nome.setEnabled(true);
-                            nome.setClickable(true);
-                            valor.setClickable(true);
-                            valor.setEnabled(true);
-                            descricao.setEnabled(true);
-                            descricao.setClickable(true);
-                            imgProduto.setClickable(true);
-                            imgProduto.setEnabled(true);
 
-// nao cai no if mudar o metodo
+
+
+                            // nao cai no if mudar o metodo
                             if(nome.isInEditMode()==true&& valor.isInEditMode()==true&& descricao.isInEditMode()==true
                              && imgProduto.isInEditMode()==true)
                             {
